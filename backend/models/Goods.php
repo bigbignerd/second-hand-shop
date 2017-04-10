@@ -55,20 +55,28 @@ class Goods extends \backend\models\Base
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'name' => 'Name',
-            'classifyId' => 'Classify ID',
-            'childClassifyId' => 'Child Classify ID',
-            'price' => 'Price',
-            'desc' => 'Desc',
-            'number' => 'Number',
-            'images' => 'Images',
-            'condition' => 'Condition',
-            'publisherId' => 'Publisher ID',
-            'city' => 'City',
-            'viewNum' => 'View Num',
+            'title' => '标题',
+            'name' => '商品名称',
+            'classifyId' => '所属主分类',
+            'childClassifyId' => '所属子分类',
+            'price' => '价格',
+            'desc' => '商品描述',
+            'number' => '数量',
+            'images' => '上传图片',
+            'condition' => '商品成色',
+            'publisherId' => '发布者',
+            'city' => '所在城市',
+            'viewNum' => '浏览量',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+    public function beforeSave($insert)
+    {
+        parent::beforeSave($insert);
+        if($this->isNewRecord){
+            $this->publisherId = Yii::$app->user->identity->id;
+        }
+        return true;
     }
 }
