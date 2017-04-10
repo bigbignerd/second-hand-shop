@@ -2,7 +2,7 @@
 namespace backend\models;
 use yii\helpers\ArrayHelper;
 
-class PzBase extends \yii\db\ActiveRecord
+class Base extends \yii\db\ActiveRecord
 {
 	/** @var 部门与职位公用的一个属性：公司列表数组 */
     public $companyMap = [];
