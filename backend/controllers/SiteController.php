@@ -36,7 +36,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    // 'logout' => ['post'],
                 ],
             ],
         ];
@@ -97,23 +97,23 @@ class SiteController extends Controller
         return $this->goHome();
     }
     /**
-     * 临时注册
+     * 注册
      * @author bignerd
      * @since  2017-03-29T14:52:27+0800
      */
-    // public function actionSignup()
-    // {
-    //     $model = new SignupForm();
-    //     if ($model->load(Yii::$app->request->post())) {
-    //         if ($user = $model->signup()) {
-    //             if (Yii::$app->getUser()->login($user)) {
-    //                 return $this->goHome();
-    //             }
-    //         }
-    //     }
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
 
-    //     return $this->render('signup', [
-    //         'model' => $model,
-    //     ]);
-    // }
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
 }

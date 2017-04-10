@@ -10,26 +10,22 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
+<section>
+    <div id="agileits-sign-in-page" class="sign-in-wrapper">
+        <div class="agileinfo_signin">
+        <h3>用户登陆</h3>
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
+                
+                <label class="checkbox"><input type="checkbox" name="LoginForm[rememberMe]">Remember me</label>
+                
+                <input type="submit" value="登陆">
             <?php ActiveForm::end(); ?>
+            <h6> 还不是注册会员? <a href="signup.html">去注册</a> </h6>
         </div>
     </div>
-</div>
+</section>

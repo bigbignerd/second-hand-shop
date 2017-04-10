@@ -10,26 +10,22 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to signup:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
+<section>
+    <div id="agileits-sign-in-page" class="sign-in-wrapper">
+        <div class="agileinfo_signin">
+        <h3>用户注册</h3>
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+        
+                <?= $form->field($model, 'username')->textInput(['placeholder'=>'请输入用户名','autofocus' => true]) ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'email')->textInput(['placeholder'=>'请输入邮箱']) ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-                </div>
-
+                <?= $form->field($model, 'role')->radioList(['1'=>'买家','2'=>'卖家'])?>
+                <input type="submit" value="注册">
             <?php ActiveForm::end(); ?>
         </div>
     </div>
-</div>
+</section>

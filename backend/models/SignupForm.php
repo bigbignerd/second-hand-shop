@@ -13,6 +13,7 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $phone;
+    public $role;
 
 
     /**
@@ -22,17 +23,18 @@ class SignupForm extends Model
     {
         return [
             ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'required'],
+            ['username', 'required','message'=>'用户名不能为空'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'required'],
+            ['email', 'required','message'=>'邮箱地址不能为空'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
-            ['password', 'required'],
+            ['role', 'required','message'=>'请选择注册为买家还是卖家'],
+            ['password', 'required','message'=>'密码不能为空'],
             ['password', 'string', 'min' => 6],
         ];
     }
@@ -50,6 +52,7 @@ class SignupForm extends Model
         
         $user = new User();
         $user->username = $this->username;
+        $user->role = $this->role;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
