@@ -28,20 +28,11 @@ MainAsset::register($this);
 <div class="wrapper">
     <?=$this->render('header');?>
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1><?=ucfirst(Yii::$app->controller->id)?>
-                <small><?=ucfirst(Yii::$app->controller->action->id)?> panel</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active"><?=ucfirst(Yii::$app->controller->id)?></li>
-            </ol>
-        </section>
         <section class="content">
             <?=$content;?>            
         </section>
     </div>
+    <?=$this->render('footer')?>
 </div>
 <?php $this->endBody() ?>
 </body>
