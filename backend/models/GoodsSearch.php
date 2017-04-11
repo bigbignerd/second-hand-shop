@@ -80,4 +80,45 @@ class GoodsSearch extends Goods
 
         return $dataProvider;
     }
+    public function searchMy($params)
+    {
+        $query = Goods::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+        //搜索条件
+        $query->where(['publisherId' => Yii::$app->user->identity->id]);
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'classifyId' => $this->classifyId,
+            'childClassifyId' => $this->childClassifyId,
+            'price' => $this->price,
+            'number' => $this->number,
+            'condition' => $this->condition,
+            'publisherId' => $this->publisherId,
+            'viewNum' => $this->viewNum,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ]);
+
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'desc', $this->desc])
+            ->andFilterWhere(['like', 'images', $this->images])
+            ->andFilterWhere(['like', 'city', $this->city]);
+
+        return $dataProvider;
+    }
 }
