@@ -9,3 +9,4 @@ Yii::setAlias('jsPath','http://'.$_SERVER['SERVER_NAME'].'/public/js');
 Yii::setAlias('cssPath','http://'.$_SERVER['SERVER_NAME'].'/public/css');
 Yii::setAlias('imgPath','http://'.$_SERVER['SERVER_NAME'].'/public/images');
 Yii::setAlias('plugin','http://'.$_SERVER['SERVER_NAME'].'/public/plugins');
+Yii::setAlias('upload','http://'.$_SERVER['SERVER_NAME'].'/public/uploads');

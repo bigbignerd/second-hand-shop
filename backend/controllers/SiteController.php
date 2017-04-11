@@ -61,9 +61,56 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
-    }
+        $classify = $this->hotClassify();
 
+        return $this->render('index', [
+            'hotClassify' => $classify,
+        ]);
+    }
+    /**
+     * 热门分类数据
+     * @author bignerd
+     * @since  2017-04-11T14:07:43+0800
+     */
+    protected function hotClassify()
+    {
+        $selectId = ['1','2','3','4','5','11','29','8'];
+        $model = new \backend\models\Classify();
+        $data  = $model->find()->select(['id','name'])
+                       ->where(['id'=>$selectId])
+                       ->asArray()
+                       ->all();
+        $iconMap = [
+            '1' => 'fa fa-laptop',
+            '2' => 'fa fa-mobile',
+            '3' => 'fa fa-camera',
+            '4' => 'glyphicon glyphicon-time',
+            '5' => 'fa fa-gamepad',
+            '11'=> 'fa fa-desktop',
+            '8' => 'fa fa-code-fork',
+            '29' => 'fa fa-music'
+        ];
+        /** @var  图标背景色 */
+        $color = ['1'=>'#3fb7d2','2' =>'#15c01c', '3' =>'#7e3b07','4' => '#1963ce','5' =>'#070c1f','11'=>'#7fbad8','8' =>'#df8012','29' =>'#f49ecf'];
+
+        foreach ($data as $k => $v) {
+            $data[$k]['icon']  = $iconMap[$v['id']];
+            $data[$k]['color'] = $color[$v['id']];
+        }
+        return $data;
+    }
+    public function latestGoods()
+    {
+        $model = new \backend\models\Goods();
+        $data  = $model->find()->orderBy('created_at asc')->limit(6)
+                       ->asArray()
+                       ->all();
+        foreach ($data as $k => $v) {
+            $image = $v['images'];
+            $imageArray = explode(",", $image);
+            $data[$k]['images'] = Yii::getAlias("@")
+        }
+    }
     /**
      * Login action.
      *

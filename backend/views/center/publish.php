@@ -9,7 +9,7 @@ use backend\widget\Uploadify;
 	</div>
 	<div class="row" style="padding: 5px 15px;">
 		<div class="col-md-12">
-				<?php $form = ActiveForm::begin(); ?>
+			<?php $form = ActiveForm::begin(); ?>
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
 			    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -40,7 +40,7 @@ use backend\widget\Uploadify;
 				</div>
 				<div class="col-md-2"></div>
 
-				<?php ActiveForm::end(); ?>
+			<?php ActiveForm::end(); ?>
 		</div>
 	</div>
 </div>	

@@ -13,10 +13,10 @@
 					<h3><a href="javascrip:void(0);">我的订单</a></h3>
 				</div>
 				<div class="range">
-					<h3><a href="javascrip:void(0);">发布闲置</a></h3>
+					<h3><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/publish-goods'])?>">发布闲置</a></h3>
 				</div>
 				<div class="range">
-					<h3><a href="javascrip:void(0);">我的商品</a></h3>
+					<h3><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/my-goods'])?>">我的商品</a></h3>
 				</div>
 				<div class="range">
 					<h3><a href="javascrip:void(0);">我的消息</a></h3>
