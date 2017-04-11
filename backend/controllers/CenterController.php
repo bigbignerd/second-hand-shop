@@ -26,7 +26,7 @@ class CenterController extends \backend\controllers\CommonController
          * 这里需要添加发布商品前的实名认证检查
          */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['goods-detail', 'id' => $model->id]);
         } else {
             return $this->render('publish', [
                 'model' => $model,

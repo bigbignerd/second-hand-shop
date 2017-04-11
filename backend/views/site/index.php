@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 $this->title = 'BigNerd dashboard';
+$image = Yii::getAlias("@imgPath");
 ?>
 <!-- 首页滚动导航 -->
 <div class="slider">
@@ -50,98 +51,46 @@ $this->title = 'BigNerd dashboard';
 		</div>
 	</div>
 	<!-- 最新商品推荐 -->
-	<div class="w3l-popular-ads">  
+	<div class="w3l-popular-ads" style="float: left;background-color: #fff">  
 		<h3>最新商品推荐</h3>
-		 <div class="w3l-popular-ads-info">
+		<div class="w3l-popular-ads-info">
+		 	<?php foreach($latestGoods as $g => $goods): ?>
 			<div class="col-md-4 w3ls-portfolio-left">
 				<div class="portfolio-img event-img">
-					<img src="images/ad1.jpg" class="img-responsive" alt="">
+					<img style="width: 201px;height: 201px;object-fit: cover" src="<?=$goods['images']?>" class="img-responsive" alt="">
 					<div class="over-image"></div>
 				</div>
 				<div class="portfolio-description">
-				   <h4><a href="cars.html">Latest Cars</a></h4>
-				   <p>Suspendisse placerat mattis arcu nec por</p>
-					<a href="cars.html">
-						<span>Explore</span>
+				   <h4><a href="###"><?=$goods['name']?></a></h4>
+				   <p><?=$goods['title']?></p>
+					<a href="###">
+						<span>查看</span>
 					</a>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
-			<div class="col-md-4 w3ls-portfolio-left">
-				<div class="portfolio-img event-img">
-					<img src="images/ad2.jpg" class="img-responsive" alt="">
-					 <div class="over-image"></div>
-				</div>
-				<div class="portfolio-description">
-				   <h4><a href="real-estate.html">Apartments for Sale</a></h4>
-				   <p>Suspendisse placerat mattis arcu nec por</p>
-					<a href="real-estate.html">
-						<span>Explore</span>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
+			<?php endforeach;?>
+		</div>
+	</div>
+	<!-- 合作伙伴 -->
+	<div class="w3layouts-partners" style="float: left;width: 100%">
+		<h3>合作伙伴</h3>
+			<div class="container">
+				<ul>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-1.png" alt=""></a></li>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-2.png" alt=""></a></li>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-3.png" alt=""></a></li>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-4.png" alt=""></a></li>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-5.png" alt=""></a></li>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-6.png" alt=""></a></li>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-7.png" alt=""></a></li>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-8.png" alt=""></a></li>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-9.png" alt=""></a></li>
+					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-10.png" alt=""></a></li>	
+				</ul>
 			</div>
-			<div class="col-md-4 w3ls-portfolio-left">
-				<div class="portfolio-img event-img">
-					<img src="images/ad3.jpg" class="img-responsive" alt="">
-					 <div class="over-image"></div>
-				</div>
-				<div class="portfolio-description">
-				   <h4><a href="jobs.html">BPO jobs</a></h4>
-				   <p>Suspendisse placerat mattis arcu nec por</p>
-					<a href="jobs.html">
-						<span>Explore</span>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-4 w3ls-portfolio-left">
-				<div class="portfolio-img event-img">
-					<img src="images/ad4.jpg" class="img-responsive" alt="">
-					 <div class="over-image"></div>
-				</div>
-				<div class="portfolio-description">
-				   <h4><a href="electronics-appliances.html">Accessories</a></h4>
-				   <p>Suspendisse placerat mattis arcu nec por</p>
-					<a href="electronics-appliances.html">
-						<span>Explore</span>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-4 w3ls-portfolio-left">
-				<div class="portfolio-img event-img">
-					<img src="images/ad5.jpg" class="img-responsive" alt="">
-					 <div class="over-image"></div>
-				</div>
-				<div class="portfolio-description">
-				   <h4><a href="furnitures.html">Home Appliances</a></h4>
-				   <p>Suspendisse placerat mattis arcu nec por</p>
-					<a href="furnitures.html">
-						<span>Explore</span>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="col-md-4 w3ls-portfolio-left">
-				<div class="portfolio-img event-img">
-					<img src="images/ad6.jpg" class="img-responsive" alt="">
-					 <div class="over-image"></div>
-				</div>
-				<div class="portfolio-description">
-				   <h4><a href="fashion.html">Clothing</a></h4>
-				   <p>Suspendisse placerat mattis arcu nec por</p>
-					<a href="fashion.html">
-						<span>Explore</span>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"> </div>
-		 </div>
-	 </div>
-
-
+		</div>
+	</div>
 </div>
 
 <script>

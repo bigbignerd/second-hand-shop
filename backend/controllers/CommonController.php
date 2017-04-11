@@ -1,5 +1,6 @@
 <?php
 namespace backend\controllers;
+use Yii;
 
 class CommonController extends \yii\web\Controller
 {
@@ -7,8 +8,11 @@ class CommonController extends \yii\web\Controller
     {
         parent::beforeAction($action);
         $this->layout = 'center';
-
-        return true;
+        if(!Yii::$app->user->identity->id){
+            return $this->redirect(['site/login']);
+        }else{
+            return true;
+        }
     }
     public function initClassify($model)
     {

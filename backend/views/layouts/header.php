@@ -6,7 +6,7 @@ $js  = Yii::getAlias("@jsPath");
 <header>
     <div class="w3ls-header"><!--header-one--> 
         <div class="w3ls-header-left">
-            <p><a href="mobileapp.html"><i class="fa fa-download" aria-hidden="true"></i>Download Mobile App </a></p>
+            <p><a href="###"><i class="fa fa-bell" aria-hidden="true"></i>Welcome to resale </a></p>
         </div>
         <div class="w3ls-header-right">
             <ul>
@@ -15,9 +15,11 @@ $js  = Yii::getAlias("@jsPath");
                         if(Yii::$app->user->identity->id){
                             $text = Yii::$app->user->identity->username;
                             $url = '###';
+                            $logout = true;
                         }else{
                             $text = '登陆';
                             $url = Yii::$app->urlManager->createAbsoluteUrl(['site/login']);
+                            $logout = false;
                         }
                     ?>
                     <a href="<?=$url?>" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i><?=$text?></a>
@@ -41,12 +43,12 @@ $js  = Yii::getAlias("@jsPath");
     <div class="container">
         <div class="agile-its-header">
             <div class="logo">
-                <h1><a href="index.html"><span>Re</span>sale-v2</a></h1>
+                <h1><a href="/"><span>Re</span>sale</a></h1>
             </div>
             <div class="agileits_search">
                 <form action="#" method="post">
-                    <input name="Search" type="text" placeholder="How can we help you today?" required="" />
-                    <select id="agileinfo_search" name="agileinfo_search" required="">
+                    <input name="Search" type="text" placeholder="搜索你需" required="" />
+                    <!-- <select id="agileinfo_search" name="agileinfo_search" required="">
                         <option value="">All Categories</option>
                         <option value="Mobiles">Mobiles</option>
                         <option value="Electronics & Appliances">Electronics & Appliances</option>
@@ -59,12 +61,12 @@ $js  = Yii::getAlias("@jsPath");
                         <option value="Services">Services</option>
                         <option value="Jobs">Jobs</option>
                         <option value="Real Estates">Real Estates</option>
-                    </select>
+                    </select> -->
                     <button type="submit" class="btn btn-default" aria-label="Left Align">
                         <i class="fa fa-search" aria-hidden="true"> </i>
                     </button>
                 </form>
-            <a class="post-w3layouts-ad" href="post-ad.html">Post Free Ad</a>
+            <a class="post-w3layouts-ad" href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/publish-goods'])?>">发布闲置</a>
             </div>  
             <div class="clearfix"></div>
         </div>

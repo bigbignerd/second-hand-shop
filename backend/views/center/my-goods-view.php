@@ -39,7 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		            'desc',
 		            'number',
 		            'images:ntext',
-		            'condition',
 		            [
 		            	'attribute' => 'condition',
 		            	'value' => function($data) use($model){
