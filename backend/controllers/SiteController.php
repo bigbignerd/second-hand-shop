@@ -61,10 +61,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $classify = $this->hotClassify();
+        $classify    = $this->hotClassify();
+        $latestGoods = $this->latestGoods();
 
         return $this->render('index', [
             'hotClassify' => $classify,
+            'latestGoods' => $latestGoods,
         ]);
     }
     /**
@@ -108,8 +110,9 @@ class SiteController extends Controller
         foreach ($data as $k => $v) {
             $image = $v['images'];
             $imageArray = explode(",", $image);
-            $data[$k]['images'] = Yii::getAlias("@")
+            $data[$k]['images'] = Yii::getAlias("@upload").'/'.$imageArray[0];
         }
+        return $data;
     }
     /**
      * Login action.
