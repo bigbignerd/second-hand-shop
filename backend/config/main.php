@@ -16,6 +16,13 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [//禁止加载默认jquery.js
+                    'js'=>[]
+                ],
+            ],
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

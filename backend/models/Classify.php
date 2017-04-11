@@ -51,4 +51,16 @@ class Classify extends \backend\models\Base
             'remark' => 'Remark',
         ];
     }
+    public function mainClassify()
+    {
+        $data = $this->find()->where(['parentId'=>0])->asArray()->all();
+        $map  = \yii\helpers\ArrayHelper::map($data,'id','name');
+        return $map;
+    }
+    public function childClassify()
+    {
+        $data = $this->find()->where(['>','parentId',0])->asArray()->all();
+        $map  = \yii\helpers\ArrayHelper::map($data,'id','name');
+        return $map;
+    }
 }

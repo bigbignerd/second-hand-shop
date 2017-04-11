@@ -25,6 +25,9 @@ use Yii;
  */
 class Goods extends \backend\models\Base
 {
+    public $goodsCondition = ['5'=>'5成新','7'=>'7成新','9'=>'九成新','10'=>'10成新'];
+    public $mainClassify;
+    public $childClassify;
     /**
      * @inheritdoc
      */
@@ -39,7 +42,7 @@ class Goods extends \backend\models\Base
     public function rules()
     {
         return [
-            [['title', 'name', 'classifyId', 'publisherId'], 'required'],
+            [['title', 'name', 'classifyId', 'desc', 'number', 'price'], 'required'],
             [['classifyId', 'childClassifyId', 'number', 'condition', 'publisherId', 'viewNum', 'created_at', 'updated_at'], 'integer'],
             [['price'], 'number'],
             [['images'], 'string'],

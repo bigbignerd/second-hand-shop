@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use backend\widget\Uploadify;
 ?>
 <div class="container" style="width: 100%">
 	<div class="row" style="text-align: center;">
@@ -15,19 +16,21 @@ use yii\widgets\ActiveForm;
 
 			    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-			    <?= $form->field($model, 'classifyId')->textInput() ?>
+			    <?= $form->field($model, 'classifyId')->dropdownList($model->mainClassify) ?>
 
-			    <?= $form->field($model, 'childClassifyId')->textInput() ?>
+			    <?= $form->field($model, 'childClassifyId')->dropdownList($model->childClassify) ?>
 
 			    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
-			    <?= $form->field($model, 'desc')->textInput(['maxlength' => true]) ?>
-
 			    <?= $form->field($model, 'number')->textInput() ?>
 
-			    <?= $form->field($model, 'images')->textarea(['rows' => 6]) ?>
+			    <?= $form->field($model, 'desc')->textarea(['rows' => 6]) ?>
 
-			    <?= $form->field($model, 'condition')->textInput() ?>
+			    <?= $form->field($model, 'images')->textInput(['readonly'=>'readonly','id' => 'goodsImage']) ?>
+
+			    <?= Uploadify::widget(['targetId'=>'goodsImage', 'multi'=>true])?>
+
+			    <?= $form->field($model, 'condition')->radioList($model->goodsCondition) ?>
 
 			    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 

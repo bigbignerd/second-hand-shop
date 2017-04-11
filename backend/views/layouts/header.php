@@ -1,6 +1,8 @@
 <?php
 $img = Yii::getAlias('@imgPath').'/img/';
+$js  = Yii::getAlias("@jsPath");
 ?>
+<script type="text/javascript" src="<?=$js?>/jquery-1.10.2.js"></script>
 <header>
     <div class="w3ls-header"><!--header-one--> 
         <div class="w3ls-header-left">

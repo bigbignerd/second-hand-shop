@@ -15,7 +15,8 @@ class CenterController extends \backend\controllers\CommonController
     {
     	$model = new Goods();
     	//get classify
-
+        $model = $this->initClassify($model);
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
