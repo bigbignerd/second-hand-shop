@@ -88,4 +88,15 @@ class CenterController extends \backend\controllers\CommonController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function beforeAction($action)
+    {
+        parent::beforeAction($action);
+        $this->layout = 'center';
+        if(!Yii::$app->user->identity->id){
+            return $this->redirect(['site/login']);
+        }else{
+            return true;
+        }
+    }
 }

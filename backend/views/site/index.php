@@ -51,7 +51,7 @@ $image = Yii::getAlias("@imgPath");
 		</div>
 	</div>
 	<!-- 最新商品推荐 -->
-	<div class="w3l-popular-ads" style="float: left;background-color: #fff">  
+	<div class="w3l-popular-ads" style="width:100%;float: left;background-color: #fff">  
 		<h3>最新商品推荐</h3>
 		<div class="w3l-popular-ads-info">
 		 	<?php foreach($latestGoods as $g => $goods): ?>
@@ -75,20 +75,19 @@ $image = Yii::getAlias("@imgPath");
 	<!-- 合作伙伴 -->
 	<div class="w3layouts-partners" style="float: left;width: 100%">
 		<h3>合作伙伴</h3>
-			<div class="container">
-				<ul>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-1.png" alt=""></a></li>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-2.png" alt=""></a></li>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-3.png" alt=""></a></li>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-4.png" alt=""></a></li>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-5.png" alt=""></a></li>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-6.png" alt=""></a></li>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-7.png" alt=""></a></li>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-8.png" alt=""></a></li>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-9.png" alt=""></a></li>
-					<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-10.png" alt=""></a></li>	
-				</ul>
-			</div>
+		<div class="container">
+			<ul>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-1.png" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-2.png" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-3.png" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-4.png" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-5.png" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-6.png" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-7.png" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-8.png" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-9.png" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-10.png" alt=""></a></li>	
+			</ul>
 		</div>
 	</div>
 </div>

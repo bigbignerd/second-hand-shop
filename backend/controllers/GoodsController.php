@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\web\Controller;
 use backend\models\Goods;
 use backend\models\GoodsSearch;
 use backend\controllers\CommonController;
