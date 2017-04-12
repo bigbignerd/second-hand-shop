@@ -25,7 +25,7 @@ use Yii;
  */
 class Goods extends \backend\models\Base
 {
-    public $goodsCondition = ['5'=>'5成新','7'=>'7成新','9'=>'九成新','10'=>'10成新'];
+    public $goodsCondition = ['5'=>'五成新','7'=>'七成新','9'=>'九成新','10'=>'十成新'];
     public $mainClassify;
     public $childClassify;
     /**

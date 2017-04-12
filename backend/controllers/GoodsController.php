@@ -117,6 +117,7 @@ class GoodsController extends CommonController
     protected function findModel($id)
     {
         if (($model = Goods::findOne($id)) !== null) {
+            $model = $this->initClassify($model);
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
