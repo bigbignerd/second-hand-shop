@@ -2,8 +2,10 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\LinkPager;
 
 $image = Yii::getAlias("@imgPath");
+$upload = Yii::getAlias("@upload");
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\GoodsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -27,15 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="browse-category ads-list">
                 <label>城市</label>
                 <select class="form-control" style="border-radius: 0">     
-                    <option value="Mobiles">Mobiles</option>
-                    <option value="Electronics &amp; Appliances">Electronics &amp; Appliances</option>             
+                    <option value="北京">北京</option>
+                    <option value="天津">天津</option>             
+                    <option value="上海">上海</option>             
                 </select>
             </div>
             <div class="browse-category ads-list">
                 <label>分类</label>
                 <select class="form-control" tabindex="-98">
-                  <option value="Mobiles">Mobiles</option>
-                  <option value="Electronics &amp; Appliances">Electronics &amp; Appliances</option>
+                    <?php foreach($searchModel->mainClassify as $key => $v):?>
+                      <option value="<?=$key?>"><?=$v?></option>
+                    <?php endforeach;?>
                 </select>
             </div>
             <div class="search-product ads-list">
@@ -67,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <img src="<?=$image?>/f1.jpg" title="ad image" alt="">
                             </div>
                             <div class="w3-featured-ad-right">
-                                <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+                                <h4>推荐商品介绍，介绍介绍介绍</h4>
                                 <p>$ 450</p>
                             </div>
                             <div class="clearfix"></div>
@@ -79,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <img src="<?=$image?>/f2.jpg" title="ad image" alt="">
                             </div>
                             <div class="w3-featured-ad-right">
-                                <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+                                <h4>推荐商品介绍，介绍介绍介绍</h4>
                                 <p>$ 380</p>
                             </div>
                             <div class="clearfix"></div>
@@ -91,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <img src="<?=$image?>/f3.jpg" title="ad image" alt="">
                             </div>
                             <div class="w3-featured-ad-right">
-                                <h4>Lorem Ipsum is simply dummy text of the printing industry</h4>
+                                <h4>推荐商品介绍，介绍介绍介绍</h4>
                                 <p>$ 560</p>
                             </div>
                             <div class="clearfix"></div>
@@ -122,36 +126,31 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                     <div class="clearfix"></div>
                                     <ul class="list">
-                                        <a href="single.html">
+                                    <?php foreach($allData as $kk => $goods):?>
+                                        <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/view','id'=>$goods['id']])?>">
                                             <li>
-                                            <img src="images/m1.jpg" title="" alt="" />
+                                            <?php
+                                                $goodsImage = explode(",", $goods['images']);
+                                                if(!empty($goodsImage) && isset($goodsImage[0])){
+                                                    $imgUrl = $upload.'/'.$goodsImage[0];
+                                                }else{
+                                                    $imgUrl = '';
+                                                }
+                                            ?>
+                                            <img src="<?=$imgUrl?>" title="" alt="" />
                                             <section class="list-left">
-                                            <h5 class="title">There are many variations of passages of Lorem Ipsum</h5>
-                                            <span class="adprice">$290</span>
-                                            <p class="catpath">Mobile Phones » Brand</p>
+                                                <h5 class="title"><?=$goods['title']?></h5>
+                                                <span class="adprice">$<?=$goods['price']?></span>
+                                                <p class="catpath">全部 » <?=$searchModel->mainClassify[$goods['classifyId']]?></p>
                                             </section>
                                             <section class="list-right">
-                                            <span class="date">Today, 17:55</span>
-                                            <span class="cityname">City name</span>
+                                            <span class="date"><?php echo date('Y.m.d H:i', $goods['created_at'])?></span>
+                                            <span class="cityname"><?=$goods['city']?></span>
                                             </section>
                                             <div class="clearfix"></div>
                                             </li> 
                                         </a>
-                                        <a href="single.html">
-                                            <li>
-                                            <img src="images/m2.jpg" title="" alt="" />
-                                            <section class="list-left">
-                                            <h5 class="title">It is a long established fact that a reader</h5>
-                                            <span class="adprice">$310</span>
-                                            <p class="catpath">Mobile Phones » Brand</p>
-                                            </section>
-                                            <section class="list-right">
-                                            <span class="date">Today, 17:45</span>
-                                            <span class="cityname">City name</span>
-                                            </section>
-                                            <div class="clearfix"></div>
-                                            </li> 
-                                        </a>
+                                    <?php endforeach;?>
                                     </ul>
                                 </div>
                                 </div>
@@ -159,7 +158,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                 </div>
-                <ul class="pagination pagination-sm">
+                <div>
+                    <?php echo LinkPager::widget(['pagination'=>$dataProvider->pagination]); ?>
+                </div>
+                <!-- <ul class="pagination pagination-sm">
                     <li><a href="#">Prev</a></li>
                     <li><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
@@ -170,43 +172,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <li><a href="#">7</a></li>
                     <li><a href="#">8</a></li>
                     <li><a href="#">Next</a></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>
 </div>
 
-<div class="goods-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Goods', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'title',
-            'name',
-            'classifyId',
-            'childClassifyId',
-            // 'price',
-            // 'desc',
-            // 'number',
-            // 'images:ntext',
-            // 'condition',
-            // 'publisherId',
-            // 'city',
-            // 'viewNum',
-            // 'created_at',
-            // 'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-</div>

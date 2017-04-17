@@ -37,11 +37,14 @@ class GoodsController extends CommonController
     public function actionIndex()
     {
         $searchModel = new GoodsSearch();
+        $searchModel = $this->initClassify($searchModel);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $allData = $dataProvider->query->asArray()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'allData' => $allData,
         ]);
     }
 

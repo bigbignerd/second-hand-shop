@@ -17,7 +17,7 @@ $image = Yii::getAlias("@imgPath");
 		<li id="large-btns1_s1" class="large-btns1_on" style="float: left; position: relative; opacity: 1; z-index: 2; display: list-item; transition: opacity 500ms ease-in-out;">
 			<div class="w3ls-slide-text">
 				<h3>查看所有商品信息</h3>
-				<a href="###" class="w3layouts-explore">Explore</a>
+				<a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/index'])?>" class="w3layouts-explore">Explore</a>
 			</div>
 		</li>
 	</ul>

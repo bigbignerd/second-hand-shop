@@ -14,7 +14,7 @@ $js  = Yii::getAlias("@jsPath");
                     <?php
                         if(Yii::$app->user->identity->id){
                             $text = Yii::$app->user->identity->username;
-                            $url = '###';
+                            $url = Yii::$app->urlManager->createAbsoluteUrl(['center/index']);
                             $logout = true;
                         }else{
                             $text = '登陆';
@@ -23,6 +23,9 @@ $js  = Yii::getAlias("@jsPath");
                         }
                     ?>
                     <a href="<?=$url?>" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i><?=$text?></a>
+                    <?php if($logout):?>
+                        <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['site/logout'])?>" aria-expanded="false">退出</a>
+                    <?php endif;?>
                 </li>
                 <li class="dropdown head-dpdn">
                     <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['site/signup'])?>" aria-expanded="false">
@@ -30,7 +33,7 @@ $js  = Yii::getAlias("@jsPath");
                     </a>
                 </li>
                 <li class="dropdown head-dpdn">
-                    <a href="help.html"><i class="fa fa-question-circle" aria-hidden="true"></i> 关于</a>
+                    <a href="###"><i class="fa fa-question-circle" aria-hidden="true"></i> 关于</a>
                 </li>
                 <!-- <li class="dropdown head-dpdn">
                     <a href="#"><span class="active uls-trigger"><i class="fa fa-language" aria-hidden="true"></i>languages</span></a>

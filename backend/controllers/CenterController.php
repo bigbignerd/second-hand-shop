@@ -9,6 +9,8 @@ class CenterController extends \backend\controllers\CommonController
 {
     public function actionIndex()
     {
+        $user = new \common\models\User();
+        
         return $this->render('index');
     }
     /**

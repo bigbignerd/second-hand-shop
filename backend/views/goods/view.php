@@ -10,6 +10,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Goods', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $image = Yii::getAlias("@imgPath");
+$upload = Yii::getAlias("@upload");
 $jsPath = Yii::getAlias("@jsPath");
 ?>
 <style type="text/css">
@@ -25,13 +26,23 @@ $jsPath = Yii::getAlias("@jsPath");
     }
     .cnt span{margin-right: 20px;}
     .time{margin-top: 5px;font-size: 12px; }
+    textarea{
+        width: 100%;
+        border: 1px solid #ddd;
+        padding: 20px;
+        resize: vertical;
+        outline: none;
+    }
+    .p_0{
+        padding-left: 0px;
+    }
 </style>
 <!-- 导航 -->
 <div class="w3layouts-breadcrumbs text-center">
     <div class="container">
         <span class="agile-breadcrumbs">
-        <a href="index.html"><i class="fa fa-home home_1"></i></a> / 
-        <a href="categories.html">商品</a> / 
+        <a href="/"><i class="fa fa-home home_1"></i></a> / 
+        <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/index'])?>">商品</a> / 
         <span>详情</span></span>
     </div>
 </div>
@@ -45,32 +56,16 @@ $jsPath = Yii::getAlias("@jsPath");
                     
                     <div class="flex-viewport" style="overflow: hidden; position: relative;">
                         <ul class="slides" style="width: 1200%; transition-duration: 0.6s; transform: translate3d(-2500px, 0px, 0px);">
-                            <li data-thumb="<?=$image?>/ss4.jpg" class="clone" aria-hidden="true" style="width: 625px; float: left; display: block;">
-                                <img style="height: 250px;object-fit: cover;" src="<?=$image?>/ss4.jpg" draggable="false">
+                        <?php
+                            $imgUrl = explode(",", $model->images);
+                        ?>
+                        <?php foreach($imgUrl as $k => $v):?>
+                            <li data-thumb="<?=$upload?>/<?=$v?>" class="clone" aria-hidden="true" style="width: 625px; float: left; display: block;">
+                                <img style="height: 300px;object-fit: cover;" src="<?=$upload?>/<?=$v?>" draggable="false">
                             </li>
-                            <li data-thumb="<?=$image?>/ss1.jpg" class="" style="width: 625px; float: left; display: block;">
-                                <img style="height: 250px;object-fit: cover;" src="<?=$image?>/ss1.jpg" draggable="false">
-                            </li>
-                            <li data-thumb="<?=$image?>/ss2.jpg" class="" style="width: 625px; float: left; display: block;">
-                                <img style="height: 250px;object-fit: cover;" src="<?=$image?>/ss2.jpg" draggable="false">
-                            </li>
-                            <li data-thumb="<?=$image?>/ss3.jpg" class="" style="width: 625px; float: left; display: block;">
-                                <img style="height: 250px;object-fit: cover;" src="<?=$image?>/ss3.jpg" draggable="false">
-                            </li>
-                            <li data-thumb="<?=$image?>/ss4.jpg" class="flex-active-slide" style="width: 625px; float: left; display: block;">
-                                <img style="height: 250px;object-fit: cover;" src="<?=$image?>/ss4.jpg" draggable="false">
-                            </li>
-                            <li data-thumb="<?=$image?>/ss1.jpg" class="clone" aria-hidden="true" style="width: 625px; float: left; display: block;">
-                                <img style="height: 250px;object-fit: cover;" src="<?=$image?>/ss1.jpg" draggable="false">
-                            </li>
+                        <?php endforeach;?>
                         </ul>
                     </div>
-                    <!-- <ol class="flex-control-nav flex-control-thumbs">
-                        <li><img src="<?=$image?>/ss1.jpg" class="" draggable="false"></li>
-                        <li><img src="<?=$image?>/ss2.jpg" draggable="false" class=""></li>
-                        <li><img src="<?=$image?>/ss3.jpg" draggable="false" class=""></li>
-                        <li><img src="<?=$image?>/ss4.jpg" draggable="false" class="flex-active"></li>
-                    </ol> -->
                     <ul class="flex-direction-nav">
                         <li class="flex-nav-prev"><a class="flex-prev" href="#">Previous</a></li>
                         <li class="flex-nav-next"><a class="flex-next" href="#">Next</a></li>
@@ -98,18 +93,25 @@ $jsPath = Yii::getAlias("@jsPath");
                 <!-- 用户留言 -->
                 <div class="product-details" style="margin-top: 20px;">
                     <div class="col-md-3" style="height: 40px;line-height:40px;background-color: #ffda44;text-align: center;"><b>用户留言</b></div>
-                    <div class="col-md-12">
-                        <textarea></textarea>
-                        <a href="##" type="button" class="btn btn-primary">确定</a>
+                    <div class="col-md-12 p_0" style="margin-top: 20px"> 
+                        <textarea rows="4"></textarea>
+                    </div>
+                    <div class="col-md-12 p_0">
+                        <a href="javascript:void(0);" id="comment" class="post-w3layouts-ad">发布</a>
+                    </div>
+                    <div class="col-md-12 p_0">
+                        <h4>留言内容:</h4>
                     </div>
                     <div class="col-md-12" style="padding: 0px">
                         <div class="col-md-12 comment">
                             <div class="cnt"><span>xxx</span>6000收了</div>
                             <div class="time">2017.01.01 11:24</div>
-                        </div><div class="col-md-12 comment">
+                        </div>
+                        <div class="col-md-12 comment">
                             <div class="cnt"><span>xxx</span>6000收了</div>
                             <div class="time">2017.01.01 11:24</div>
-                        </div><div class="col-md-12 comment">
+                        </div>
+                        <div class="col-md-12 comment">
                             <div class="cnt"><span>xxx</span>6000收了</div>
                             <div class="time">2017.01.01 11:24</div>
                         </div>
