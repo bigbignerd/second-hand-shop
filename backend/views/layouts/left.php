@@ -7,7 +7,7 @@
 			<!-- 个人中心左侧导航 -->
 			<div class="side-bar col-md-3">
 				<div class="range">
-					<h3><a href="javascrip:void(0);">个人信息</a></h3>
+					<h3><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/index'])?>">个人信息</a></h3>
 				</div>
 				<div class="range">
 					<h3><a href="javascrip:void(0);">我的订单</a></h3>

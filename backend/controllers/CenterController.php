@@ -9,9 +9,32 @@ class CenterController extends \backend\controllers\CommonController
 {
     public function actionIndex()
     {
-        $user = new \common\models\User();
-        
-        return $this->render('index');
+        $user = $this->findUserModel(Yii::$app->user->identity->id);
+
+        return $this->render('index', [
+            'model' => $user,
+        ]);
+    }
+    public function actionUpdateInfo($id)
+    {
+        $model = $this->findUserModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            return $this->redirect(['index', 'id' => $model->id]);
+        } else {
+            return $this->render('update-info', [
+                'model' => $model,
+            ]);
+        }
+    }
+    protected function findUserModel($id)
+    {
+        if (($model = \common\models\User::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
     /**
      * 发布新的闲置商品
