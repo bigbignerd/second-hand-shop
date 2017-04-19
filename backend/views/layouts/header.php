@@ -49,29 +49,26 @@ $js  = Yii::getAlias("@jsPath");
                 <h1><a href="/"><span>Re</span>sale</a></h1>
             </div>
             <div class="agileits_search">
-                <form action="#" method="post">
-                    <input name="Search" type="text" placeholder="搜索你需" required="" />
-                    <!-- <select id="agileinfo_search" name="agileinfo_search" required="">
-                        <option value="">All Categories</option>
-                        <option value="Mobiles">Mobiles</option>
-                        <option value="Electronics & Appliances">Electronics & Appliances</option>
-                        <option value="Cars">Cars</option>
-                        <option value="Bikes">Bikes</option>
-                        <option value="Furnitures">Furnitures</option>
-                        <option value="Books, Sports & Hobbies">Books, Sports & Hobbies</option>
-                        <option value="Fashion">Fashion</option>
-                        <option value="Kids">Kids</option>
-                        <option value="Services">Services</option>
-                        <option value="Jobs">Jobs</option>
-                        <option value="Real Estates">Real Estates</option>
-                    </select> -->
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
-                        <i class="fa fa-search" aria-hidden="true"> </i>
-                    </button>
-                </form>
+                <input name="Search" type="text" placeholder="搜索你需" required="" />
+                <button type="btn" id="search" class="btn btn-default" aria-label="Left Align">
+                    <i class="fa fa-search" aria-hidden="true"> </i>
+                </button>
             <a class="post-w3layouts-ad" href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/publish-goods'])?>">发布闲置</a>
             </div>  
             <div class="clearfix"></div>
         </div>
     </div>
 </header>
+<?= $this->registerJs('
+    $("#search").click(function(){
+        var searchContent = $("input[name=\"Search\"]").val();
+
+        if(searchContent == ""){
+            alert("请输入搜索内容");
+            return false;
+        }else{
+            var newUrl = "'.Yii::$app->urlManager->createAbsoluteUrl(["goods/index"]).'?GoodsSearch[title]="+searchContent;
+            window.location.href = newUrl;
+        }
+    })
+')?>

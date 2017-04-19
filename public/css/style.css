@@ -3339,12 +3339,13 @@ span.w3layouts-agileinfo {
     font-size: 17px;
 }
 .item-price {
-	border: 3px solid rgba(255, 76, 76, 0.53);
+	/*border: 3px solid rgba(255, 76, 76, 0.53);*/
+  border: 3px solid #f6f6f6;
     margin-left: 15%;
     padding:0 15px;
 	position:relative;
 }
-.item-price:before {
+/*.item-price:before {
 	    content: '';
     position: absolute;
     z-index: 1;
@@ -3356,7 +3357,7 @@ span.w3layouts-agileinfo {
     width: 0;
     top: -3px;
     border-right-width: 80px;
-}
+}*/
 p.p-price {
     float: left;
     width: 50%;
@@ -3397,6 +3398,7 @@ h3.rate {
     margin: 20px;
     padding: 40px 20px;
     background: rgba(255, 76, 76, 0.53);
+    background: #f6f6f6;
     margin-left: 15%;
     margin-right: 0;
 }
@@ -3425,7 +3427,7 @@ h3.rate {
 .tips {
     margin: 20px;
     padding: 40px 20px 15px;
-    background: rgba(255, 76, 76, 0.53);
+    background: #f6f6f6;
     margin-left: 15%;
     margin-right: 0;
 }
@@ -5120,7 +5122,7 @@ label {
 		left: 33.5%;
 		border-right-width: 90px;
 		top: -205px;
-		transform: rotate(90deg);
+		/*transform: rotate(90deg);*/
 	}
 	.interested,.tips {
 		margin-left: 0;

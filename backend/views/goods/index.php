@@ -13,22 +13,31 @@ $upload = Yii::getAlias("@upload");
 $this->title = 'Goods';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style type="text/css">
+    .ads-list label{
+        color: #fff;
+    }
+    .ads-list select{
+        color: #666;
+    }
+</style>
 <!-- 导航 -->
 <div class="w3layouts-breadcrumbs text-center">
     <div class="container">
         <span class="agile-breadcrumbs">
-        <a href="index.html"><i class="fa fa-home home_1"></i></a> / 
-        <a href="categories.html">商品</a> / 
+        <a href="/"><i class="fa fa-home home_1"></i></a> / 
+        <a href="/goods/index">商品</a> / 
         <span>列表</span></span>
     </div>
 </div>
-<div class="total-ads main-grid-border" style="background-color: #fff">
+<div class="total-ads main-grid-border" style="background-color: #fff;">
     <div class="container">
         <!-- 搜索选择框 -->
-        <div class="select-box">
+        <div class="select-box" style="background-color: #e50043">
             <div class="browse-category ads-list">
                 <label>城市</label>
-                <select class="form-control" style="border-radius: 0">     
+                <select class="form-control" style="border-radius: 0" id="city"> 
+                    <option value="">按城市搜索</option>    
                     <option value="北京">北京</option>
                     <option value="天津">天津</option>             
                     <option value="上海">上海</option>             
@@ -36,7 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="browse-category ads-list">
                 <label>分类</label>
-                <select class="form-control" tabindex="-98">
+                <select class="form-control" tabindex="-98" id="classify">
+                    <option value="">按分类搜索</option>   
                     <?php foreach($searchModel->mainClassify as $key => $v):?>
                       <option value="<?=$key?>"><?=$v?></option>
                     <?php endforeach;?>
@@ -47,9 +57,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="search">
                     <div id="custom-search-input">
                     <div class="input-group">
-                        <input type="text" class="form-control input-lg" placeholder="Buscar">
+                        <input type="text" name="goodsName" class="form-control input-lg" placeholder="输入商品名称">
                         <span class="input-group-btn">
-                            <button class="btn btn-info btn-lg" type="button">
+                            <button id="searchName" class="btn btn-info btn-lg" type="button">
                                 <i class="glyphicon glyphicon-search"></i>
                             </button>
                         </span>
@@ -66,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="w3ls-featured-ads">
                     <h2 class="sear-head fer">推荐商品</h2>
                     <div class="w3l-featured-ad">
-                        <a href="single.html">
+                        <a href="/">
                             <div class="w3-featured-ad-left">
                                 <img src="<?=$image?>/f1.jpg" title="ad image" alt="">
                             </div>
@@ -78,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </a>
                     </div>
                     <div class="w3l-featured-ad">
-                        <a href="single.html">
+                        <a href="/">
                             <div class="w3-featured-ad-left">
                                 <img src="<?=$image?>/f2.jpg" title="ad image" alt="">
                             </div>
@@ -90,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </a>
                     </div>
                     <div class="w3l-featured-ad">
-                        <a href="single.html">
+                        <a href="/">
                             <div class="w3-featured-ad-left">
                                 <img src="<?=$image?>/f3.jpg" title="ad image" alt="">
                             </div>
@@ -118,9 +128,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <div class="sort" style="margin-bottom: 10px;">
                                         <div class="sort-by">
                                             <label>按价格排序 : </label>
-                                            <select>
-                                                <option value="">价格: 价格从低到高</option>
-                                                <option value="">价格: 价格从高到低</option>
+                                            <select id="price">
+                                                <option value="price">价格: 价格从低到高</option>
+                                                <option value="-price">价格: 价格从高到低</option>
                                             </select>
                                         </div>
                                     </div>
@@ -177,4 +187,34 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+<?php $this->registerJs('
+    var baseUrl = "'.Yii::$app->urlManager->createAbsoluteUrl(["goods/index"]).'";
+    /** 按城市搜索 */
+    $("#city").change(function(){
+        var city = $(this).children("option:selected").val();
+        window.location.href = baseUrl+"?GoodsSearch[city]="+city;
+    });
+    /** 按分类搜索 */
+    $("#classify").change(function(){
+        var classifyId = $(this).children("option:selected").val();
+        window.location.href = baseUrl+"?GoodsSearch[classifyId]="+classifyId;
+    });
+    /** 按价格搜索 */
+    $("#price").change(function(){
+        var price = $(this).children("option:selected").val();
+        window.location.href = baseUrl+"?sort="+price;
+    });
+    /** 按名称搜索 */
+    $("#searchName").click(function(){
+        var searchContent = $("input[name=\"goodsName\"]").val();
+
+        if(searchContent == ""){
+            alert("请输入搜索内容");
+            return false;
+        }else{
+            var newUrl = "'.Yii::$app->urlManager->createAbsoluteUrl(["goods/index"]).'?GoodsSearch[title]="+searchContent;
+            window.location.href = newUrl;
+        }
+    })
+')?>
 
