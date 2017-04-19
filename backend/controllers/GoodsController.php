@@ -58,12 +58,24 @@ class GoodsController extends CommonController
         $model = $this->findModel($id);
         $model->addVisitNum($model);
         $comment = $model->getComment($id);
-
+        //获取买家的在线状态
+        $sellerStatus = $this->getSellerStatus($model->publisherId);
         return $this->render('view', [
             'model' => $model,
             'id' => $id,
             'comment' => $comment,
+            'sellerOnline' => $sellerStatus
         ]);
+    }
+    protected function getSellerStatus($id)
+    {
+        $model = new \backend\models\UserStatus();
+        $data  = $model->find()->where(['userId'=>$id])->asArray()->one();
+        if(!empty($data) && $data['status'] == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

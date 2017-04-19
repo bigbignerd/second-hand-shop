@@ -126,14 +126,6 @@ if(Yii::$app->user->identity->id){
                                 <h3>暂无评价信息</h3>
                             </div>
                         <?php endif;?>
-                        <!-- <div class="col-md-12 comment">
-                            <div class="cnt"><span>xxx</span>6000收了</div>
-                            <div class="time">2017.01.01 11:24</div>
-                        </div>
-                        <div class="col-md-12 comment">
-                            <div class="cnt"><span>xxx</span>6000收了</div>
-                            <div class="time">2017.01.01 11:24</div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -156,8 +148,13 @@ if(Yii::$app->user->identity->id){
                     </div>
                 </div>
                 <div class="interested text-center">
-                    <h4>对次商品感兴趣?<small> 点击前往咨询卖家</small></h4>
-                    <p><i class="glyphicon glyphicon-earphone"></i><a href="">旺旺</a></p>
+                    <?php
+                        if($sellerOnline):
+                    ?>
+                        <h4>买家在线<small><a href="###">点击前往咨询卖家</a></small></h4>
+                    <?php else:?>
+                        <h4>买家暂时不在 <small>左下角可以留言</small></h4>
+                    <?php endif;?>
                 </div>
                 <div class="tips">
                     <h4>二手交易消费者安全保障服务</h4>
