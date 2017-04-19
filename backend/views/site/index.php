@@ -61,9 +61,9 @@ $image = Yii::getAlias("@imgPath");
 					<div class="over-image"></div>
 				</div>
 				<div class="portfolio-description">
-				   <h4><a href="###"><?=$goods['name']?></a></h4>
+				   <h4><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/view','id'=>$goods['id']])?>"><?=$goods['name']?></a></h4>
 				   <p><?=$goods['title']?></p>
-					<a href="###">
+					<a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/view','id'=>$goods['id']])?>">
 						<span>查看</span>
 					</a>
 				</div>
