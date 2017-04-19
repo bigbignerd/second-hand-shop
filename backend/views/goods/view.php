@@ -12,6 +12,13 @@ $this->params['breadcrumbs'][] = $this->title;
 $image = Yii::getAlias("@imgPath");
 $upload = Yii::getAlias("@upload");
 $jsPath = Yii::getAlias("@jsPath");
+if(Yii::$app->user->identity->id){
+    $isLogin = '1';
+    $userName = Yii::$app->user->identity->username;
+}else{
+    $isLogin = '0';
+    $userName = '';
+}
 ?>
 <style type="text/css">
     .comment{
@@ -86,7 +93,7 @@ $jsPath = Yii::getAlias("@jsPath");
                     <!-- //FlexSlider -->
                 <div class="product-details">
                     <h4><span class="w3layouts-agileinfo">名称 </span> : <a href="javascript:void(0);"><?=$model->name?></a><div class="clearfix"></div></h4>
-                    <h4><span class="w3layouts-agileinfo">浏览 </span> : <strong>150</strong></h4>
+                    <h4><span class="w3layouts-agileinfo">浏览 </span> : <strong><?=$model->viewNum?></strong></h4>
                     <h4><span class="w3layouts-agileinfo">数量 </span> : <?=$model->number?>&nbsp;个</h4>
                     <h4><span class="w3layouts-agileinfo">描述</span> :<p><?=$model->desc?></p><div class="clearfix"></div></h4>
                 </div>
@@ -94,7 +101,7 @@ $jsPath = Yii::getAlias("@jsPath");
                 <div class="product-details" style="margin-top: 20px;">
                     <div class="col-md-3" style="height: 40px;line-height:40px;background-color: #ffda44;text-align: center;"><b>用户留言</b></div>
                     <div class="col-md-12 p_0" style="margin-top: 20px"> 
-                        <textarea rows="4"></textarea>
+                        <textarea rows="4" id="comment-cnt"></textarea>
                     </div>
                     <div class="col-md-12 p_0">
                         <a href="javascript:void(0);" id="comment" class="post-w3layouts-ad">发布</a>
@@ -102,19 +109,31 @@ $jsPath = Yii::getAlias("@jsPath");
                     <div class="col-md-12 p_0">
                         <h4>留言内容:</h4>
                     </div>
-                    <div class="col-md-12" style="padding: 0px">
-                        <div class="col-md-12 comment">
+                    <div class="col-md-12" style="padding: 0px" id="user-comment-list">
+                        <?php
+                        if(!empty($comment)):
+                            foreach ($comment as $k => $v):
+                         ?>
+                                <div class="col-md-12 comment">
+                                    <div class="cnt"><span><?=$v['username']?></span><?=$v['comment']?></div>
+                                    <div class="time"><?=date('Y.m.d H:i',$v['created_at'])?></div>
+                                </div>
+                        <?php
+                            endforeach;
+                        ?>
+                        <?php else:?>
+                            <div class="col-md-12 comment" id="no-comment">
+                                <h3>暂无评价信息</h3>
+                            </div>
+                        <?php endif;?>
+                        <!-- <div class="col-md-12 comment">
                             <div class="cnt"><span>xxx</span>6000收了</div>
                             <div class="time">2017.01.01 11:24</div>
                         </div>
                         <div class="col-md-12 comment">
                             <div class="cnt"><span>xxx</span>6000收了</div>
                             <div class="time">2017.01.01 11:24</div>
-                        </div>
-                        <div class="col-md-12 comment">
-                            <div class="cnt"><span>xxx</span>6000收了</div>
-                            <div class="time">2017.01.01 11:24</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -157,3 +176,61 @@ $jsPath = Yii::getAlias("@jsPath");
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function currentTime(){
+        var d = new Date(),str = '';
+        str += d.getFullYear()+'.';
+        str += d.getMonth() + 1+'.';
+        str += d.getDate()+' ';
+        str += d.getHours()+':'; 
+        str += d.getMinutes();
+        return str;
+    }
+    function addComment(content)
+    {
+        //隐藏暂无评论
+        $("#no-comment").hide();
+
+        var html  = '<div class="col-md-12 comment">';
+            html += '<div class="cnt"><span>'+"<?=$userName?>"+'</span>';
+            html += content;
+            html += '</div>';
+            html += '<div class="time">'+currentTime()+'</div>';
+            html += '</div>';
+        $("#user-comment-list").prepend(html);
+        html = '';
+        return true;
+    }
+</script>
+<?php $this->registerJs('
+    $("#comment").click(function(){
+
+        var content = $("#comment-cnt").val();
+
+        var isLogin = '.$isLogin.';
+        if(!isLogin){
+            alert("请先登录，再进行评论");
+            return false;
+        }
+        if(content == ""){
+            alert("请输入评价内容");
+            return false;
+        }else{
+            var postUrl  = "'.Yii::$app->urlManager->createAbsoluteUrl(["comment/add"]).'";
+            var postData = {
+                "comment" : content,
+                "goodsId" : "'.$id.'",
+            };
+            $.post(postUrl, postData, function(res){
+                var res = $.parseJSON(res);
+                if(res.errno == 0){
+                    addComment(content);
+                    alert(res.errmsg);
+                }else{
+                    alert(res.errmsg);
+                    return;
+                }
+            });
+        }
+    })
+')?>

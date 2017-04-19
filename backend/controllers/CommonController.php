@@ -12,5 +12,15 @@ class CommonController extends \yii\web\Controller
 
         return $model;
     }
+    public function ajaxJson($errno="0",$errmsg="",$data=[])
+    {
+    	$json = [
+    		'errno' => $errno,
+    		'errmsg'=> $errmsg,
+    		'data' => $data
+    	];
+    	echo json_encode($json);
+    	exit;
+    }
 }
 ?>

@@ -82,4 +82,35 @@ class Goods extends \backend\models\Base
         }
         return true;
     }
+    /**
+     * 添加商品浏览量
+     * @since  2017-04-19T13:53:06+0800
+     */
+    public function addVisitNum($model)
+    {
+        $model->viewNum = ($model->viewNum)+1;
+        return $model->save();
+    }
+    /**
+     * 获取一个商品的用户评论信息
+     * @since  2017-04-19T14:33:21+0800
+     * @param  $id 商品id
+     */
+    public function getComment($id)
+    {
+        $model = new \backend\models\Comment();
+        $map   = ['goodsId' => $id];
+        $data  = $model->find()->where($map)
+                       ->orderBy("created_at desc")
+                       ->asArray()
+                       ->all();
+        if(!empty($data)){
+            $user = new \common\models\User();
+            foreach ($data as $k => $v) {
+                $userData = $user->findOne($v['userId']);
+                $data[$k]['username'] = $userData->username;
+            }
+        }
+        return $data;
+    }
 }

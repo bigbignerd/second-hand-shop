@@ -55,8 +55,14 @@ class GoodsController extends CommonController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $model->addVisitNum($model);
+        $comment = $model->getComment($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'id' => $id,
+            'comment' => $comment,
         ]);
     }
 
