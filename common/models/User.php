@@ -50,12 +50,22 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['name','phone'],'string'],
+            [['name'],'string'],
+            // [['phone'],'integer'],
+            ['phone','uniquePhone'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
+    public function uniquePhone($attribute, $params)
+    {
+        $phones = $this->find()->select('phone')->asArray()->all();
+        $phones = \yii\helpers\ArrayHelper::getColumn($phones,'phone');
 
+        if(in_array($this->phone, $phones) && $this->isNewRecord){
+            $this->addError($attribute,'手机号码已存在');
+        }
+    }
     /**
      * @inheritdoc
      */

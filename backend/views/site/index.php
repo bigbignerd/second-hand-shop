@@ -11,7 +11,7 @@ $image = Yii::getAlias("@imgPath");
 		<li id="large-btns1_s0" class="" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;">
 			<div class="w3ls-slide-text">
 				<h3>搜索查看所有的商品分类</h3>
-				<a href="###" class="w3layouts-explore-all">Explore</a>
+				<a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/index'])?>" class="w3layouts-explore-all">Explore</a>
 			</div>
 		</li>
 		<li id="large-btns1_s1" class="large-btns1_on" style="float: left; position: relative; opacity: 1; z-index: 2; display: list-item; transition: opacity 500ms ease-in-out;">
@@ -36,7 +36,7 @@ $image = Yii::getAlias("@imgPath");
 			<?php foreach($hotClassify as $k => $classify):?>
 			<div class="col-md-3">
 				<div class="focus-grid w3layouts-boder<?=$count++?>">
-					<a class="btn-8" href="###">
+					<a class="btn-8" href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/index','GoodsSearch[classifyId]'=>$classify['id']])?>">
 						<div class="focus-border">
 							<div class="focus-layout">
 								<div class="focus-image"><i style="background-color: <?=$classify['color']?>" class="<?=$classify['icon']?>"></i></div>
@@ -61,9 +61,9 @@ $image = Yii::getAlias("@imgPath");
 					<div class="over-image"></div>
 				</div>
 				<div class="portfolio-description">
-				   <h4><a href="###"><?=$goods['name']?></a></h4>
+				   <h4><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/view','id'=>$goods['id']])?>"><?=$goods['name']?></a></h4>
 				   <p><?=$goods['title']?></p>
-					<a href="###">
+					<a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/view','id'=>$goods['id']])?>">
 						<span>查看</span>
 					</a>
 				</div>
