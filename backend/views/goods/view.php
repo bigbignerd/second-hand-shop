@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Goods */
@@ -44,6 +45,40 @@ if(Yii::$app->user->identity->id){
         padding-left: 0px;
     }
 </style>
+<!-- 购买商品弹出层 -->
+<div class="modal fade" id="buy" tabindex="999" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h5 class="modal-title" id="myModalLabel">
+                    请填写地址信息
+                </h5>
+            </div>
+            <div class="modal-body">
+                <?php $form = ActiveForm::begin(); ?>
+                
+                <?=$form->field($orderModel, "name")->textInput()?>
+
+                <?=$form->field($orderModel, "phone")->textInput()?>
+
+                <?=$form->field($orderModel, "address")->textInput()?>
+                
+                <input type="hidden" name="Order['sellerId']" value="<?=$model->publisherId?>">
+                <?php ActiveForm::end(); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    提交更改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <!-- 导航 -->
 <div class="w3layouts-breadcrumbs text-center">
     <div class="container">
@@ -146,6 +181,13 @@ if(Yii::$app->user->identity->id){
                         <h4><?=$model->mainClassify[$model->classifyId]?></h4>
                         <div class="clearfix"></div>
                     </div>
+                </div>
+                <div class="item-price" style="padding-left:0px;padding-right:0px;border: none;text-align: center;padding-top: 15px;">
+                    <?php if($model->number > 0):?>
+                    <a style="width: 100%;" data-toggle="modal" data-target="#buy" class="btn btn-success">立即预约购买</a>
+                    <?php else:?>
+                    <button style="width: 100%;" class="btn">已经出售</button>
+                    <?php endif;?>
                 </div>
                 <div class="interested text-center">
                     <?php

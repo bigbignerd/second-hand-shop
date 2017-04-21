@@ -60,11 +60,15 @@ class GoodsController extends CommonController
         $comment = $model->getComment($id);
         //获取买家的在线状态
         $sellerStatus = $this->getSellerStatus($model->publisherId);
+        //order model
+        $orderModel = new \backend\models\Order();
+
         return $this->render('view', [
             'model' => $model,
             'id' => $id,
             'comment' => $comment,
-            'sellerOnline' => $sellerStatus
+            'sellerOnline' => $sellerStatus,
+            'orderModel' => $orderModel,
         ]);
     }
     protected function getSellerStatus($id)

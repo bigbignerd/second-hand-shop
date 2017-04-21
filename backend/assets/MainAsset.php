@@ -18,7 +18,7 @@ class MainAsset extends AppAsset
         'css/jquery.uls.lcd.css',
     ];
     public $js = [
-    	'js/main.js',
+    	// 'js/main.js',
     	'js/classie.js',
     	'js/bootstrap-select.js',
     	'js/jquery.leanModal.min.js',
@@ -32,6 +32,7 @@ class MainAsset extends AppAsset
         'js/responsiveslides.min.js',
         'js/move-top.js',
         'js/easing.js',
+        'js/bootstrap.js'
     ];
 
 }
