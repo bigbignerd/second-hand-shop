@@ -21,6 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'email')->textInput(['placeholder'=>'请输入邮箱']) ?>
 
+                <?= $form->field($model, 'phone')->textInput(['placeholder'=>'请输入手机号']) ?>
+
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <?= $form->field($model, 'role')->radioList(['1'=>'买家','2'=>'卖家'])?>

@@ -30,7 +30,8 @@ class Order extends \backend\models\Base
     public function rules()
     {
         return [
-            [['sellerId', 'buyerId'], 'required'],
+            [['sellerId', 'buyerId','phone','address','name'], 'required'],
+            [['phone','address','name'],'string'],
             [['sellerId', 'buyerId', 'status', 'created_at', 'updated_at'], 'integer'],
         ];
     }
@@ -47,6 +48,9 @@ class Order extends \backend\models\Base
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'address' => '收货地址',
+            'phone' => '手机号',
+            'name' => '收货人姓名',
         ];
     }
 }

@@ -127,6 +127,8 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $userStatus = new \backend\models\UserStatus();
+            $userStatus->changeStatus(1,Yii::$app->user->identity->id);
             return $this->goBack();
         } else {
             return $this->render('login', [
@@ -142,7 +144,11 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
+        $userId = Yii::$app->user->identity->id;
+        
         Yii::$app->user->logout();
+        $model = new \backend\models\UserStatus();
+        $model->changeStatus(0, $userId);
 
         return $this->goHome();
     }
