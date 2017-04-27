@@ -8,7 +8,7 @@ $image = Yii::getAlias("@imgPath");
 <!-- 首页滚动导航 -->
 <div class="slider">
 	<ul class="rslides large-btns large-btns1" id="slider" style="max-width: 800px;">
-		<li id="large-btns1_s0" class="" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;">
+		<!-- <li id="large-btns1_s0" class="" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;">
 			<div class="w3ls-slide-text">
 				<h3>搜索查看所有的商品分类</h3>
 				<a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/index'])?>" class="w3layouts-explore-all">Explore</a>
@@ -19,10 +19,10 @@ $image = Yii::getAlias("@imgPath");
 				<h3>查看所有商品信息</h3>
 				<a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/index'])?>" class="w3layouts-explore">Explore</a>
 			</div>
-		</li>
+		</li> -->
 	</ul>
-	<a href="#" class="large-btns_nav large-btns1_nav prev">Previous</a>
-	<a href="#" class="large-btns_nav large-btns1_nav next">Next</a>
+	<!-- <a href="#" class="large-btns_nav large-btns1_nav prev">Previous</a>
+	<a href="#" class="large-btns_nav large-btns1_nav next">Next</a> -->
 </div>
 <!-- content 部分 -->
 <div class="main-content" style="background-color: #fff">
