@@ -4,6 +4,7 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Goods;
 use backend\models\GoodsSearch;
+use backend\models\OrderSearch;
 
 class CenterController extends \backend\controllers\CommonController
 {
@@ -61,7 +62,17 @@ class CenterController extends \backend\controllers\CommonController
     ///////////////////////////////////
     //      个人中心 我的商品相关       //
     ///////////////////////////////////
-    
+    public function actionMyOrders()
+    {
+        $searchModel = new OrderSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['buyerId'=>Yii::$app->user->identity->id]);
+        
+        return $this->render('my-orders', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
     /**
      * 我发布的商品列表
      * @author bignerd

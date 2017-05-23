@@ -62,7 +62,10 @@ class GoodsController extends CommonController
         $sellerStatus = $this->getSellerStatus($model->publisherId);
         //order model
         $orderModel = new \backend\models\Order();
-
+        if($orderModel->load(Yii::$app->request->post()) && $orderModel->save()){
+            
+            return $this->redirect(['center/index']);
+        }
         return $this->render('view', [
             'model' => $model,
             'id' => $id,

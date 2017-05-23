@@ -113,4 +113,11 @@ class Goods extends \backend\models\Base
         }
         return $data;
     }
+    public static function getInfoBykey($id,$key)
+    {
+        $data = self::find()->where(['id'=>$id])->select($key)
+                            ->asArray()
+                            ->one();
+        return $data[$key];
+    }
 }

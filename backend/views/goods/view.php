@@ -15,10 +15,12 @@ $upload = Yii::getAlias("@upload");
 $jsPath = Yii::getAlias("@jsPath");
 if(Yii::$app->user->identity->id){
     $isLogin = '1';
+    $userId = Yii::$app->user->identity->id;
     $userName = Yii::$app->user->identity->username;
 }else{
     $isLogin = '0';
     $userName = '';
+    $userId = 0;
 }
 ?>
 <style type="text/css">
@@ -57,8 +59,9 @@ if(Yii::$app->user->identity->id){
                     请填写地址信息
                 </h5>
             </div>
+            <?php $form = ActiveForm::begin(); ?>
+
             <div class="modal-body">
-                <?php $form = ActiveForm::begin(); ?>
                 
                 <?=$form->field($orderModel, "name")->textInput()?>
 
@@ -66,16 +69,19 @@ if(Yii::$app->user->identity->id){
 
                 <?=$form->field($orderModel, "address")->textInput()?>
                 
-                <input type="hidden" name="Order['sellerId']" value="<?=$model->publisherId?>">
-                <?php ActiveForm::end(); ?>
+                <input type="hidden" name="Order[sellerId]" value="<?=$model->publisherId?>">
+                <input type="hidden" name="Order[goodsId]" value="<?=$model->id?>">
+                <input type="hidden" name="Order[buyerId]" value="<?=$userId ?>">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
-                <button type="button" class="btn btn-primary">
-                    提交更改
-                </button>
+                <!-- <button type="button" class="btn btn-default">
+                    提交订单
+                </button> -->
+                <?= Html::submitButton('提交订单', ['class' => 'btn btn-default']) ?>
             </div>
+            <?php ActiveForm::end(); ?>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
