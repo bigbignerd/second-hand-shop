@@ -1,6 +1,13 @@
 <?php
 $img = Yii::getAlias('@imgPath').'/img/';
 $js  = Yii::getAlias("@jsPath");
+$isLogin = (isset(Yii::$app->user->identity->id))? 1 : 0;
+$role = Yii::$app->user->identity->role;
+if(isset($role) && $role == 2){
+    $isSeller = 1;
+}else{
+    $isSeller = 0;
+}
 ?>
 <script type="text/javascript" src="<?=$js?>/jquery-1.10.2.js"></script>
 <header>
@@ -53,7 +60,7 @@ $js  = Yii::getAlias("@jsPath");
                 <button type="btn" id="search" class="btn btn-default" aria-label="Left Align">
                     <i class="fa fa-search" aria-hidden="true"> </i>
                 </button>
-            <a class="post-w3layouts-ad" href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/publish-goods'])?>">发布闲置</a>
+            <a class="post-w3layouts-ad" id="publish-g" href="javascript:void(0);" toUrl="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/publish-goods'])?>">发布闲置</a>
             </div>  
             <div class="clearfix"></div>
         </div>
@@ -70,5 +77,21 @@ $js  = Yii::getAlias("@jsPath");
             var newUrl = "'.Yii::$app->urlManager->createAbsoluteUrl(["goods/index"]).'?GoodsSearch[title]="+searchContent;
             window.location.href = newUrl;
         }
-    })
+    });
+    var isLogin = "'.$isLogin.'";
+    var isSeller = "'.$isSeller.'";
+    
+    $("#publish-g").click(function(){
+        if(isLogin == 0){
+            alert("请先登录");
+            return ;
+        }
+        if(isSeller == 0){
+            alert("请注册卖家账号");
+            return ;
+        }
+        if(isLogin == 1 && isSeller == 1){
+            window.location.href = $("#publish-g").attr("toUrl");
+        }
+    });
 ')?>

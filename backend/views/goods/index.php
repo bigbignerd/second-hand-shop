@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="total-ads main-grid-border" style="background-color: #fff;">
     <div class="container">
         <!-- 搜索选择框 -->
-        <div class="select-box" style="background-color: #e50043">
+        <div class="select-box" style="background-color: #f6f6f6">
             <div class="browse-category ads-list">
                 <label>城市</label>
                 <select class="form-control" style="border-radius: 0" id="city"> 
