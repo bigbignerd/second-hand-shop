@@ -21,8 +21,9 @@ class CenterController extends \backend\controllers\CommonController
         $model = $this->findUserModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            return $this->redirect(['index', 'id' => $model->id]);
+            Yii::$app->getSession()->setFlash('success','修改成功');
+            $this->refresh();
+            return true;
         } else {
             return $this->render('update-info', [
                 'model' => $model,

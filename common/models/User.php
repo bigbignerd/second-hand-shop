@@ -196,4 +196,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+    public static function nameById($id)
+    {
+        $data = self::find()->where(['id'=>$id])->asArray()->one();
+        return !empty($data['name'])? $data['name'] : '卖家';
+    }
 }

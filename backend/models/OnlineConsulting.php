@@ -49,4 +49,33 @@ class OnlineConsulting extends \backend\models\Base
             'updated_at' => 'Updated At',
         ];
     }
+    public static function getModel($map)
+    {
+        $model = self::find()->where($map)->one();
+        if($model !== NULL){
+            return $model;
+        }else{
+            return new self;
+        }
+    }
+    public function addContent($id,$content,$type)
+    {
+        $model = new \backend\models\OnlineConsultingContent();
+        $model->cid = $id;
+        $model->status = 0;
+        $model->type = $type;
+        $model->content = $content;
+        return $model->save();
+    }
+
+    public function createConversion($data)
+    {
+        $this->attributes = $data;
+        if($this->save()){
+            $this->addContent($this->id, $data['message'],$data['type']);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -58,12 +58,11 @@ class GoodsController extends CommonController
         $model = $this->findModel($id);
         $model->addVisitNum($model);
         $comment = $model->getComment($id);
-        //获取买家的在线状态
+        //获取卖家的在线状态
         $sellerStatus = $this->getSellerStatus($model->publisherId);
         //order model
         $orderModel = new \backend\models\Order();
         if($orderModel->load(Yii::$app->request->post()) && $orderModel->save()){
-            
             return $this->redirect(['center/index']);
         }
         return $this->render('view', [
@@ -84,7 +83,21 @@ class GoodsController extends CommonController
             return false;
         }
     }
+    public function actionSendMsg()
+    {
+        if(Yii::$app->request->isPost){
+            $data = Yii::$app->request->post();
 
+            $map = ['goodsId' => $data['goodsId'], 'sellerId'=>$data['sellerId'],'buyerId'=>$data['buyerId']];
+            $msg = \backend\models\OnlineConsulting::getModel($map);
+            if($msg->id){
+                $msg->addContent($msg->id,$data['message'],$data['type']);
+            }else{
+                $msg->createConversion($data);
+            }
+            $this->ajaxJson("0","发送成功");
+        }
+    }
     /**
      * Creates a new Goods model.
      * If creation is successful, the browser will be redirected to the 'view' page.

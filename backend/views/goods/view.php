@@ -17,10 +17,12 @@ if(Yii::$app->user->identity->id){
     $isLogin = '1';
     $userId = Yii::$app->user->identity->id;
     $userName = Yii::$app->user->identity->username;
+    $role = Yii::$app->user->identity->role;
 }else{
     $isLogin = '0';
     $userName = '';
     $userId = 0;
+    $role = 1;
 }
 ?>
 <style type="text/css">
@@ -82,6 +84,35 @@ if(Yii::$app->user->identity->id){
                 <?= Html::submitButton('提交订单', ['class' => 'btn btn-default']) ?>
             </div>
             <?php ActiveForm::end(); ?>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 发送消息弹出层 -->
+<div class="modal fade" id="msg" tabindex="999" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h5 class="modal-title" id="myModalLabel">
+                    发送消息给<?= \common\models\User::nameById($model->publisherId)?>
+                </h5>
+            </div>
+
+            <form name="message" id="msgForm" method="POST">
+                <div class="modal-body">
+                    <textarea name="message" id="content" rows="6"></textarea>
+                    <input type="hidden" name="sellerId" value="<?=$model->publisherId?>">
+                    <input type="hidden" name="goodsId" value="<?=$model->id?>">
+                    <input type="hidden" name="buyerId" value="<?=$userId ?>">
+                    <input type="hidden" name="type" value="<?=$role ?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a id="sendMsg" href="javascript:void(0);" class="btn btn-default">发送</a>
+                </div>
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
@@ -199,7 +230,7 @@ if(Yii::$app->user->identity->id){
                     <?php
                         if($sellerOnline):
                     ?>
-                        <h4>买家在线<small><a href="###">点击前往咨询卖家</a></small></h4>
+                        <h4>买家在线<small><a data-toggle="modal" data-target="#msg" href="javascript:void(0);">点击咨询卖家</a></small></h4>
                     <?php else:?>
                         <h4>买家暂时不在 <small>左下角可以留言</small></h4>
                     <?php endif;?>
@@ -277,5 +308,24 @@ if(Yii::$app->user->identity->id){
                 }
             });
         }
+    });
+    $("#sendMsg").click(function(){
+        var content = $("#content").val();
+        if(content == ""){
+            alert("请输入发送内容");
+            return ;
+        }
+        var message = $("#msgForm").serialize();
+        var msgUrl = "'.Yii::$app->urlManager->createAbsoluteUrl(["goods/send-msg"]).'";
+        $.post(msgUrl, message, function(res){
+            var resp = $.parseJSON(res);
+            if(resp["errno"] == "0"){
+                $("#msg").modal("hide");
+                alert("发送成功");
+            }else{
+                alet("发送失败");
+                return ;
+            }
+        });
     })
 ')?>
