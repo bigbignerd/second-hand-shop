@@ -69,8 +69,9 @@ class OnlineConsulting extends \backend\models\Base
         if($consulting){
             $contentModel = new \backend\models\OnlineConsultingContent();
             foreach ($consulting as $k => $v) {
+                $msgType = ["1"=>"2", "2"=>"1"];
                 $consulting[$k]['goodsInfo'] = $this->goodsInfo($v['goodsId']);
-                $content = $contentModel->find()->where(['cid'=>$v['id']])
+                $content = $contentModel->find()->where(['cid'=>$v['id'],'type'=>$msgType[$role]])
                                         ->orderBy('created_at desc')
                                         ->asArray()
                                         ->all();

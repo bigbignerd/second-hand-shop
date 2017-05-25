@@ -48,7 +48,7 @@ $role = Yii::$app->user->identity->role;
 					}else{
 						$text = '来自买家';
 					}
-					$text .= '关于产品：'.$msg['goodsInfo']['name'].'的咨询消息';
+					$text .= '关于产品：'.$msg['goodsInfo']['name'].'的消息';
 				?>
 				<?php foreach($msg['content'] as $k => $v):?>
 					<div class="col-md-12" style="min-height: 40px;line-height: 40px;">
