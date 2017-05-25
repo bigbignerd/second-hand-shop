@@ -327,5 +327,5 @@ if(Yii::$app->user->identity->id){
                 return ;
             }
         });
-    })
+    });
 ')?>

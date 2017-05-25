@@ -52,4 +52,9 @@ class OnlineConsultingContent extends \backend\models\Base
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getOnlineConsulting()
+    {
+        // return $this->hasOne()
+    }
 }

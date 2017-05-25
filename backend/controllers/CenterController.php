@@ -109,6 +109,17 @@ class CenterController extends \backend\controllers\CommonController
             ]);
         }
     }
+
+    public function actionMyNews()
+    {
+        $model = new \backend\models\OnlineConsulting;
+        $data  = $model->getMyNews();
+
+        return $this->render('my-news',[
+            'model' => $model,
+            'data'  => $data,
+        ]);
+    }
     /**
      * Finds the Goods model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

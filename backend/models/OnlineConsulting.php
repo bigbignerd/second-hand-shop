@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use backend\models\OnlineConsultingContent;
 
 /**
  * This is the model class for table "onlineConsulting".
@@ -48,6 +49,41 @@ class OnlineConsulting extends \backend\models\Base
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function getMyNews($read='0')
+    {
+        $map = [];
+        $role   = Yii::$app->user->identity->role;
+        $userId = Yii::$app->user->identity->id;
+
+        if($role == '1'){
+            $map['buyerId'] = $userId;
+        }else{
+            $map['sellerId'] = $userId;
+        }
+        if($read){
+            $map['status'] = $read;
+        }
+        $consulting = $this->find()->where($map)->asArray()->all();
+        if($consulting){
+            $contentModel = new \backend\models\OnlineConsultingContent();
+            foreach ($consulting as $k => $v) {
+                $consulting[$k]['goodsInfo'] = $this->goodsInfo($v['goodsId']);
+                $content = $contentModel->find()->where(['cid'=>$v['id']])
+                                        ->orderBy('created_at desc')
+                                        ->asArray()
+                                        ->all();
+                $consulting[$k]['content'] = $content;
+            }
+        }
+        return $consulting;
+    }
+    private function goodsInfo($id)
+    {
+        $goods = new \backend\models\Goods;
+        $goodsinfo = $goods->find()->where(['id'=>$id])->asArray()->one();
+        return $goodsinfo;
     }
     public static function getModel($map)
     {
