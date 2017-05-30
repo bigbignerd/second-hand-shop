@@ -77,16 +77,16 @@ $image = Yii::getAlias("@imgPath");
 		<h3>合作伙伴</h3>
 		<div class="container">
 			<ul>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-1.png" alt=""></a></li>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-2.png" alt=""></a></li>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-3.png" alt=""></a></li>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-4.png" alt=""></a></li>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-5.png" alt=""></a></li>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-6.png" alt=""></a></li>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-7.png" alt=""></a></li>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-8.png" alt=""></a></li>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-9.png" alt=""></a></li>
-				<li><a href="#"><img class="img-responsive" src="<?=$image?>/p-10.png" alt=""></a></li>	
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/logo/阿里巴巴.jpg" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/logo/花旗.jpg" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/logo/华为.jpg" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/logo/京东.jpg" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/logo/微博.jpg" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/logo/腾讯.jpg" alt=""></a></li>
+				<li><a href="#"><img class="img-responsive" src="<?=$image?>/logo/因特尔.jpg" alt=""></a></li>
+				<li><a href="#"><img style="width: 166px;height: 55px;object-fit: cover;" class="img-responsive" src="<?=$image?>/logo/当当.jpeg" alt=""></a></li>
+				<li><a href="#"><img style="width: 166px;height: 55px;object-fit: cover;" class="img-responsive" src="<?=$image?>/logo/咸鱼.jpeg" alt=""></a></li>
+				<li><a href="#"><img style="width: 166px;height: 55px;object-fit: cover;" class="img-responsive" src="<?=$image?>/logo/亚马逊.jpeg" alt=""></a></li>	
 			</ul>
 		</div>
 	</div>

@@ -10,7 +10,7 @@
 					<h3><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/index'])?>">个人信息</a></h3>
 				</div>
 				<div class="range">
-					<h3><a href="javascrip:void(0);">我的订单</a></h3>
+					<h3><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/my-orders'])?>">我的订单</a></h3>
 				</div>
 				<?php if(Yii::$app->user->identity->role == '2'):?>
 					<div class="range">

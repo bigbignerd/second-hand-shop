@@ -13,7 +13,7 @@ if(isset($role) && $role == 2){
 <header>
     <div class="w3ls-header"><!--header-one--> 
         <div class="w3ls-header-left">
-            <p><a href="###"><i class="fa fa-bell" aria-hidden="true"></i>Welcome to resale </a></p>
+            <p><a href="###"><i class="fa fa-bell" aria-hidden="true"></i> 欢迎来到闲置商品发布平台 </a></p>
         </div>
         <div class="w3ls-header-right">
             <ul>
@@ -39,9 +39,9 @@ if(isset($role) && $role == 2){
                         <i class="fa fa-align-justify" aria-hidden="true"></i>注册
                     </a>
                 </li>
-                <li class="dropdown head-dpdn">
+                <!-- <li class="dropdown head-dpdn">
                     <a href="###"><i class="fa fa-question-circle" aria-hidden="true"></i> 关于</a>
-                </li>
+                </li> -->
                 <!-- <li class="dropdown head-dpdn">
                     <a href="#"><span class="active uls-trigger"><i class="fa fa-language" aria-hidden="true"></i>languages</span></a>
                 </li> -->

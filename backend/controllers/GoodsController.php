@@ -31,8 +31,7 @@ class GoodsController extends CommonController
     }
 
     /**
-     * Lists all Goods models.
-     * @return mixed
+     * 商品列表页
      */
     public function actionIndex()
     {
@@ -49,19 +48,21 @@ class GoodsController extends CommonController
     }
 
     /**
-     * Displays a single Goods model.
-     * @param integer $id
-     * @return mixed
+     * 商品详细页
      */
     public function actionView($id)
     {
+        //根据商品id获取商品信息
         $model = $this->findModel($id);
+        //添加浏览量信息
         $model->addVisitNum($model);
+        //获取商品的评价信息
         $comment = $model->getComment($id);
         //获取卖家的在线状态
         $sellerStatus = $this->getSellerStatus($model->publisherId);
         //order model
         $orderModel = new \backend\models\Order();
+        //保存用户提交的订单购买
         if($orderModel->load(Yii::$app->request->post()) && $orderModel->save()){
             return $this->redirect(['center/index']);
         }
@@ -73,6 +74,7 @@ class GoodsController extends CommonController
             'orderModel' => $orderModel,
         ]);
     }
+    /** 获取卖家的状态 */
     protected function getSellerStatus($id)
     {
         $model = new \backend\models\UserStatus();
@@ -83,6 +85,7 @@ class GoodsController extends CommonController
             return false;
         }
     }
+    /** 发送消息 */
     public function actionSendMsg()
     {
         if(Yii::$app->request->isPost){
@@ -90,9 +93,11 @@ class GoodsController extends CommonController
 
             $map = ['goodsId' => $data['goodsId'], 'sellerId'=>$data['sellerId'],'buyerId'=>$data['buyerId']];
             $msg = \backend\models\OnlineConsulting::getModel($map);
+            //如果存在当前买家与卖家的会话，则直接向当前会话中添加内容
             if($msg->id){
                 $msg->addContent($msg->id,$data['message'],$data['type']);
             }else{
+                //否则创建会话并保存内容
                 $msg->createConversion($data);
             }
             $this->ajaxJson("0","发送成功");

@@ -2,7 +2,7 @@
 	<div class="agileits-footer-bottom text-center" style="padding-top: 20px;">
 		<div class="container">
 			<div class="w3-footer-logo">
-				<h1><a href="/"><span>Re</span>sale</a></h1>
+				<h1><a href="/"><span>闲置</span>购</a></h1>
 			</div>
 			<div class="w3-footer-social-icons">
 			</div>

@@ -55,13 +55,13 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
-     *
-     * @return string
+     * 网站首页
      */
     public function actionIndex()
     {
+        /** @var  分类信息 */
         $classify    = $this->hotClassify();
+        /** @var  最新商品信息 */
         $latestGoods = $this->latestGoods();
 
         return $this->render('index', [
@@ -101,6 +101,7 @@ class SiteController extends Controller
         }
         return $data;
     }
+    /** 数据库中获取最新数据 */
     public function latestGoods()
     {
         $model = new \backend\models\Goods();
@@ -115,9 +116,7 @@ class SiteController extends Controller
         return $data;
     }
     /**
-     * Login action.
-     *
-     * @return string
+     * 用户登录
      */
     public function actionLogin()
     {
@@ -127,6 +126,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            //如果登录成功，添加用户的在线状态
             $userStatus = new \backend\models\UserStatus();
             $userStatus->changeStatus(1,Yii::$app->user->identity->id);
             return $this->goBack();
@@ -138,22 +138,21 @@ class SiteController extends Controller
     }
 
     /**
-     * Logout action.
-     *
-     * @return string
+     * 退出登录
      */
     public function actionLogout()
     {
         $userId = Yii::$app->user->identity->id;
         
         Yii::$app->user->logout();
+        //修改用户的状态为离线
         $model = new \backend\models\UserStatus();
         $model->changeStatus(0, $userId);
 
         return $this->goHome();
     }
     /**
-     * 注册
+     * 用户注册
      * @author bignerd
      * @since  2017-03-29T14:52:27+0800
      */
