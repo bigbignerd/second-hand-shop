@@ -97,7 +97,7 @@ class CenterController extends \backend\controllers\CommonController
         $name   = $user->name;
         $role   = $user->role;
 
-        if(!$idCard || !$name || ($role !== '2')){
+        if(($idCard == '0') || empty($name) || ($role !== 2)){
             return false;
         }else{
             return true;

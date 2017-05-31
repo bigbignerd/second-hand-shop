@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <style type="text/css">
     .ads-list label{
-        color: #fff;
+        color: #000;
     }
     .ads-list select{
         color: #666;
@@ -118,8 +118,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <div class="sort-by">
                                             <label>按价格排序 : </label>
                                             <select id="price">
-                                                <option value="price">价格: 价格从低到高</option>
-                                                <option value="-price">价格: 价格从高到低</option>
+                                                <!-- <option value="">默认</option> -->
+                                                <option value="price" <?php if($sort =='asc') echo 'selected = "selected"';?> >价格: 价格从低到高</option>
+                                                <option value="-price" <?php if($sort =='desc') echo 'selected = "selected"';?> >价格: 价格从高到低</option>
                                             </select>
                                         </div>
                                     </div>
@@ -191,6 +192,7 @@ $this->params['breadcrumbs'][] = $this->title;
     /** 按价格搜索 */
     $("#price").change(function(){
         var price = $(this).children("option:selected").val();
+
         window.location.href = baseUrl+"?sort="+price;
     });
     /** 按名称搜索 */

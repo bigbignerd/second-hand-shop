@@ -29,5 +29,58 @@ class CommentController extends \backend\controllers\CommonController
     		}
     	}
     }
-
+    public function actionTest()
+    {
+        $classObj = new \ReflectionClass('\backend\controllers\CenterController');
+        // print $this->getSource($classObj);
+        $method = $classObj->getMethod('actionRealName');
+        $params = $method->getParameters();
+        foreach ($params as $p) {
+            print $this->validatePara($p);
+        }
+    }
+    public function t2(\ReflectionClass $class)
+    {
+        $detail = '';
+        $name = $class->getName();
+        if($class->isUserDefined()){
+            $detail .= "$name is user defined\n";
+        }
+        if($class->isInternal()){
+            $detail .= "$name is built in\n";
+        }
+        if($class->isInterface()){
+            $detail .= "$name is interface\n";
+        }
+        if($class->isAbstract()){
+            $detail .= "$name is abstract\n";
+        }
+        if($class->isFinal()){
+            $detail .= "$name is final\n";
+        }
+        if($class->isInstantiable()){
+            $detail .= "$name is instantiable\n";
+        }
+        return $detail;
+    }
+    public function getSource(\ReflectionClass $class)
+    {
+        $path = $class->getFileName();
+        $lines = @file($path);//以数组的方式读取文件（行）
+        $from = $class->getStartLine();
+        $to   = $class->getEndLine();
+        $len  = $to - $from + 1;
+        return implode(array_slice($lines, $from - 1, $len));
+    }
+    public function validatePara(\ReflectionParameter $params)
+    {
+        $paraName = $params->getName();
+        $position = $params->getPosition();
+        $detail = "$$paraName has position $position\n";
+        if($params->isDefaultValueAvailable()){
+            $def = $params->getDefaultValue();
+            $detail .= "$$paraName has default value $def\n";
+        }
+        return $detail;
+    }
 }

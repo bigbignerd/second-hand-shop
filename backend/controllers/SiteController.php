@@ -162,6 +162,9 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+                     //如果登录成功，添加用户的在线状态
+                    $userStatus = new \backend\models\UserStatus();
+                    $userStatus->changeStatus(1,Yii::$app->user->identity->id);
                     return $this->goHome();
                 }
             }

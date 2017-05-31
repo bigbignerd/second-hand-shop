@@ -77,7 +77,12 @@ class GoodsSearch extends Goods
             ->andFilterWhere(['like', 'desc', $this->desc])
             ->andFilterWhere(['like', 'images', $this->images])
             ->andFilterWhere(['like', 'city', $this->city]);
-
+        if(isset($params['sort']) && (strpos($params['sort'], "-") !== false)){
+            $order = 'desc';
+        }else{
+            $order = 'asc';
+        }
+        $query->orderBy('price '.$order);
         return $dataProvider;
     }
     public function searchMy($params)

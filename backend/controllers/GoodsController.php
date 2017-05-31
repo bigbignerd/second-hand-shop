@@ -42,12 +42,22 @@ class GoodsController extends CommonController
         //推广商品id
         $map = ['id'=>['1','2']];
         $recommend = $dataProvider->query->where($map)->asArray()->all();
-
+        //判断价格排序类型
+        if(!isset($_GET['sort'])){
+            $sort = 'asc';
+        }else{
+            if(strrpos($_GET['sort'], '-') !== false){
+                $sort = 'desc';                
+            }else{
+                $sort = 'asc';
+            }
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'allData' => $allData,
-            'recommend' => $recommend
+            'recommend' => $recommend,
+            'sort' => $sort,
         ]);
     }
 

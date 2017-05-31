@@ -16,10 +16,11 @@
 					<div class="range">
 						<h3><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/publish-goods'])?>">发布闲置</a></h3>
 					</div>
-				<?php endif;?>
+				
 				<div class="range">
 					<h3><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/my-goods'])?>">我的商品</a></h3>
 				</div>
+				<?php endif;?>
 				<div class="range">
 					<h3><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/my-news'])?>">我的消息</a></h3>
 				</div>

@@ -230,9 +230,9 @@ if(Yii::$app->user->identity->id){
                     <?php
                         if($sellerOnline):
                     ?>
-                        <h4>买家在线<small><a data-toggle="modal" data-target="#msg" href="javascript:void(0);">点击咨询卖家</a></small></h4>
+                        <h4>卖家在线<small><a data-toggle="modal" data-target="#msg" href="javascript:void(0);">点击咨询卖家</a></small></h4>
                     <?php else:?>
-                        <h4>买家暂时不在 <small>左下角可以留言</small></h4>
+                        <h4>卖家暂时不在 <small>左下角可以留言</small></h4>
                     <?php endif;?>
                 </div>
                 <div class="tips">

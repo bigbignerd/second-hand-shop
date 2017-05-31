@@ -50,11 +50,22 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['name'],'string'],
+            [['name','idCard'],'string'],
             // [['phone'],'integer'],
             ['phone','uniquePhone'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'name' => '姓名',
+            'username' => '用户名',
+            'phone' => '手机号',
+            'role' => '角色',
+            'idCard' => '身份证号',
         ];
     }
     public function uniquePhone($attribute, $params)

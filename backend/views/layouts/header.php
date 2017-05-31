@@ -61,6 +61,8 @@ if(isset($role) && $role == 2){
                     <i class="fa fa-search" aria-hidden="true"> </i>
                 </button>
             <a class="post-w3layouts-ad" id="publish-g" href="javascript:void(0);" toUrl="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/publish-goods'])?>">发布闲置</a>
+            <a class="post-w3layouts-ad" style="margin-right: 10px;"  href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/index'])?>">全部商品</a>
+
             </div>  
             <div class="clearfix"></div>
         </div>
