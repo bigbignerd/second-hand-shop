@@ -75,6 +75,7 @@ if(Yii::$app->user->identity->id){
                 <input type="hidden" name="Order[goodsId]" value="<?=$model->id?>">
                 <input type="hidden" name="Order[buyerId]" value="<?=$userId ?>">
             </div>
+            <div><span style="color:green">请提前与卖家确认支付方式</span></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                 </button>
