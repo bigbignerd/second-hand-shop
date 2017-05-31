@@ -39,11 +39,15 @@ class GoodsController extends CommonController
         $searchModel = $this->initClassify($searchModel);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $allData = $dataProvider->query->asArray()->all();
+        //推广商品id
+        $map = ['id'=>['1','2']];
+        $recommend = $dataProvider->query->where($map)->asArray()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'allData' => $allData,
+            'recommend' => $recommend
         ]);
     }
 

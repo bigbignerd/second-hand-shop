@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'BigNerd dashboard';
+$this->title = '闲置购首页';
 $image = Yii::getAlias("@imgPath");
 ?>
 <!-- 首页滚动导航 -->

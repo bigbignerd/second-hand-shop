@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-md-12">
 			<?= Html::a('修改个人信息', ['update-info', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
 			<?php if(Yii::$app->user->identity->role == 2):?>
-				<?= Html::a('实名认证', ['###', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+				<?= Html::a('实名认证', ['real-name', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
 			<?php endif;?>
 		</div>
 	</div>

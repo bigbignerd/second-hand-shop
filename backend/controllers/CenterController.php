@@ -3,6 +3,7 @@
 namespace backend\controllers;
 use Yii;
 use backend\models\Goods;
+use backend\models\Order;
 use backend\models\GoodsSearch;
 use backend\models\OrderSearch;
 
@@ -42,6 +43,23 @@ class CenterController extends \backend\controllers\CommonController
             ]);
         }
     }
+    public function actionRealName($id)
+    {
+        //根据url传递的id参数获取用户的信息
+        $model = $this->findUserModel($id);
+        //如果是post请求 则进行保存操作
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //提示用户实名认证成功
+            Yii::$app->getSession()->setFlash('success','认证成功');
+            $this->refresh();
+            return true;
+        //非POST请求 则显示修改个人信息页面
+        } else {
+            return $this->render('real-name', [
+                'model' => $model,
+            ]);
+        }
+    }
     /** 获取用户信息 */
     protected function findUserModel($id)
     {
@@ -63,9 +81,26 @@ class CenterController extends \backend\controllers\CommonController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['goods-detail', 'id' => $model->id]);
         } else {
+            //判断用户是否进行了实名认证
+            $isNamed = $this->isNamed();
+
             return $this->render('publish', [
                 'model' => $model,
+                'isNamed' => $isNamed
             ]);
+        }
+    }
+    private function isNamed()
+    {
+        $user = $this->findUserModel(Yii::$app->user->identity->id);
+        $idCard = $user->idCard;
+        $name   = $user->name;
+        $role   = $user->role;
+
+        if(!$idCard || !$name || ($role !== '2')){
+            return false;
+        }else{
+            return true;
         }
     }
     ///////////////////////////////////
@@ -97,6 +132,24 @@ class CenterController extends \backend\controllers\CommonController
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    /**
+     * 订单详情
+     * @param  $id 订单的id
+     */
+    public function actionOrderDetail($id)
+    {
+        return $this->render('order-detail',[
+            'model' => $this->findOrderModel($id),
+        ]);
+    }
+    public function actionOrderStatus($id,$status)
+    {
+        $model = new \backend\models\Order;
+        $res = $model->changeStatus($id,$status);
+        if($res){
+            return $this->redirect(Yii::$app->request->referrer);            
+        }
     }
     /**
      * 个人中心-我发布的商品列表
@@ -161,6 +214,14 @@ class CenterController extends \backend\controllers\CommonController
     {
         if (($model = Goods::findOne($id)) !== null) {
             $model = $this->initClassify($model);
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    protected function findOrderModel($id)
+    {
+        if (($model = Order::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

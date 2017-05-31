@@ -33,11 +33,15 @@ use backend\widget\Uploadify;
 			    <?= $form->field($model, 'condition')->radioList($model->goodsCondition) ?>
 
 			    <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
-
+				<?php if($isNamed):?>
 			    <div class="form-group">
 			        <?= Html::submitButton($model->isNewRecord ? '发布' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-success']) ?>
 			    </div>
+				<?php else:?>
+					<p style="color:red;margin-bottom: 5px;">您还未进行实名认证,请实名认证</p>
+					<a class="btn btn-success" href="<?=Yii::$app->urlManager->createAbsoluteUrl(['center/real-name','id'=>Yii::$app->user->identity->id])?>">实名认证</a>
 				</div>
+				<?php endif;?>
 				<div class="col-md-2"></div>
 
 			<?php ActiveForm::end(); ?>

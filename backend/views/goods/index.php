@@ -75,43 +75,32 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="side-bar col-md-3">
                 <div class="w3ls-featured-ads">
                     <h2 class="sear-head fer">推荐商品</h2>
-                    <div class="w3l-featured-ad">
-                        <a href="/">
-                            <div class="w3-featured-ad-left">
-                                <img src="<?=$image?>/f1.jpg" title="ad image" alt="">
-                            </div>
-                            <div class="w3-featured-ad-right">
-                                <h4>推荐商品介绍，介绍介绍介绍</h4>
-                                <p>$ 450</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </a>
-                    </div>
-                    <div class="w3l-featured-ad">
-                        <a href="/">
-                            <div class="w3-featured-ad-left">
-                                <img src="<?=$image?>/f2.jpg" title="ad image" alt="">
-                            </div>
-                            <div class="w3-featured-ad-right">
-                                <h4>推荐商品介绍，介绍介绍介绍</h4>
-                                <p>$ 380</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </a>
-                    </div>
-                    <div class="w3l-featured-ad">
-                        <a href="/">
-                            <div class="w3-featured-ad-left">
-                                <img src="<?=$image?>/f3.jpg" title="ad image" alt="">
-                            </div>
-                            <div class="w3-featured-ad-right">
-                                <h4>推荐商品介绍，介绍介绍介绍</h4>
-                                <p>$ 560</p>
-                            </div>
-                            <div class="clearfix"></div>
-                        </a>
-                    </div>
-                    <div class="clearfix"></div>
+                    <?php 
+                        if(!empty($recommend)):
+                            foreach ($recommend as $k => $rec) :
+                    ?>
+                        <div class="w3l-featured-ad">
+                            <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['goods/view','id'=>$rec['id']])?>">
+                                <div class="w3-featured-ad-left">
+                                <?php
+                                    $img = explode(",", $rec['images']);
+                                    if(!empty($img) && isset($img[0])){
+                                        $recimgUrl = $upload.'/'.$img[0];
+                                    }else{
+                                        $recimgUrl = '';
+                                    }
+                                ?>
+                                    <img src="<?=$recimgUrl?>" title="ad image" alt="">
+                                </div>
+                                <div class="w3-featured-ad-right">
+                                    <h4><?=$rec['title']?></h4>
+                                    <p>￥ <?=$rec['price']?></p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </a>
+                        </div>
+                        <?php endforeach;?>
+                    <?php endif;?>
                 </div>
             </div>
             <!-- 右侧列表 -->

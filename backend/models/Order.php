@@ -45,7 +45,7 @@ class Order extends \backend\models\Base
             'id' => 'ID',
             'sellerId' => 'Seller ID',
             'buyerId' => 'Buyer ID',
-            'status' => 'Status',
+            'status' => '订单状态',
             'created_at' => '交易时间',
             'updated_at' => 'Updated At',
             'address' => '收货地址',
@@ -55,5 +55,18 @@ class Order extends \backend\models\Base
             'goodsName' => '商品名',
             'price' => '价格',
         ];
+    }
+    /**
+     * 修改订单状态
+     * @param  $id 订单ID
+     * @param  $status 当前状态
+     */
+    public function changeStatus($id,$status)
+    {
+        $map = [
+            '0' => '1',
+            '1' => '2',
+        ];
+        return $this->updateAll(['status'=>$map[$status]],['id'=>$id]);
     }
 }
