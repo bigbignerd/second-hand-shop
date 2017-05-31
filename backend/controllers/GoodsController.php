@@ -78,7 +78,7 @@ class GoodsController extends CommonController
         $orderModel = new \backend\models\Order();
         //保存用户提交的订单购买
         if($orderModel->load(Yii::$app->request->post()) && $orderModel->save()){
-            return $this->redirect(['center/index']);
+            return $this->redirect(['center/my-orders']);
         }
         return $this->render('view', [
             'model' => $model,
